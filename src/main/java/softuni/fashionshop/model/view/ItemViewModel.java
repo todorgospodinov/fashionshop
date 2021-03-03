@@ -1,24 +1,23 @@
-package softuni.fashionshop.model.service;
+package softuni.fashionshop.model.view;
+
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-public class ItemServiceModel {
-
+public class ItemViewModel {
     private Long id;
     private String name;
     private String description;
     private BigDecimal price;
-    private String gender;
-    private CategoryServiceModel category;
+    private String imgUrl;
 
-    public ItemServiceModel() {
+    public ItemViewModel() {
     }
 @Id
     public Long getId() {
         return id;
     }
 
-    public ItemServiceModel setId(Long id) {
+    public ItemViewModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -47,19 +46,11 @@ public class ItemServiceModel {
         this.price = price;
     }
 
-    public String getGender() {
-        return gender;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public CategoryServiceModel getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryServiceModel category) {
-        this.category = category;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
