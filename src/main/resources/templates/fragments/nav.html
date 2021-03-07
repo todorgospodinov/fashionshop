@@ -7,11 +7,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">LOGO</a>
+                <a class="navbar-brand" th:href="@{/}">LOGO</a>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Panel
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Statistics</a>
+                    <a class="dropdown-item" href="#">Add article</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a th:href="@{/users/home}">Home</a></li>
                     <li><a href="#">About us</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Stores</a></li>
@@ -21,7 +32,7 @@
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <li sec:authorize="isAuthenticated()"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:action="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
 
                 </ul>
             </div>

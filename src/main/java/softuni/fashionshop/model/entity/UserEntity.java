@@ -1,9 +1,6 @@
 package softuni.fashionshop.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +10,12 @@ public class UserEntity extends BaseEntity {
     private String username;
     private String password;
     private String fullName;
+    private String email;
     private List<Role> roles = new ArrayList<>();
 
     public UserEntity() {
     }
-
+    @Column(name="username")
     public String getUsername() {
         return username;
     }
@@ -26,7 +24,7 @@ public class UserEntity extends BaseEntity {
         this.username = username;
         return this;
     }
-
+    @Column(name="password")
     public String getPassword() {
         return password;
     }
@@ -35,7 +33,7 @@ public class UserEntity extends BaseEntity {
         this.password = password;
         return this;
     }
-
+@Column(name="full_name")
     public String getFullName() {
         return fullName;
     }
@@ -44,6 +42,16 @@ public class UserEntity extends BaseEntity {
         this.fullName = fullName;
         return this;
     }
+    @Column(name="email")
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     @ManyToMany(fetch= FetchType.EAGER)
     public List<Role> getRoles() {
         return roles;
