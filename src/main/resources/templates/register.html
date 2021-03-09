@@ -62,7 +62,7 @@
             <h1>Please register</h1>
 
             <hr>
-            <form th:object="${registrationBindingModel}" th:href="@{/users/register}" method="POST">
+            <form th:object="${registrationBindingModel}" th:action="@{/users/register}" method="POST">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label text-light">Username</label>

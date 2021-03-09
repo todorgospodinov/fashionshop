@@ -1,6 +1,7 @@
 package softuni.fashionshop.model.service;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class ItemServiceModel {
 
@@ -8,7 +9,9 @@ public class ItemServiceModel {
     private String name;
     private String description;
     private BigDecimal price;
+    private LocalDateTime receivedOn;
     private String gender;
+    private String imageUrl;
     private CategoryServiceModel category;
 
     public ItemServiceModel() {
@@ -45,6 +48,24 @@ public class ItemServiceModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public LocalDateTime getReceivedOn() {
+        return receivedOn;
+    }
+
+    public ItemServiceModel setReceivedOn(LocalDateTime receivedOn) {
+        this.receivedOn = receivedOn;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public ItemServiceModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
     }
 
     public String getGender() {

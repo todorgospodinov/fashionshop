@@ -49,7 +49,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 // on login failure redirect here
                         failureForwardUrl("/users/login-error").
                 and().
-                logout().
+                logout(logout -> logout.
                 // which endpoint performs logout, e.g. http://localhost:8080/logout (!this should be POST request - this is action anti CSF Attacks)
                         logoutUrl("/logout").
                 // where to land after logout
@@ -57,8 +57,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 // remove the session from the server
                         invalidateHttpSession(true).
                 // delete the session cookie
-                        deleteCookies("JSESSIONID");//bye! :-)
+                        deleteCookies("JSESSIONID"));
     }
+
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

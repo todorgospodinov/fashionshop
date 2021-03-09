@@ -16,13 +16,13 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Statistics</a>
-                    <a class="dropdown-item" href="#">Add article</a>
+                    <a class="dropdown-item" th:href="@{/items/add}" >Add item</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/users/home}">Home</a></li>
+
                     <li><a href="#">About us</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Stores</a></li>
@@ -31,8 +31,36 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li sec:authorize="isAuthenticated()"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:action="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a></li>
+
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <form th:action="@{/logout}" method="POST">
+                            <button type="submit" class="nav-link">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+
+
+<!--                    <li sec:authorize="isAuthenticated()">-->
+
+<!--                        <form th:action="@{/logout}">-->
+
+<!--                            <span class="glyphicon glyphicon-log-out"></span>Logout-->
+
+<!--                        </form>-->
+
+
+<!--                    </li>-->
+
+<!--                    <div sec:authorize="isAuthenticated()">-->
+<!--                    <a href="javascript: document.logoutForm.submit()" class="dropdown-toggle">Sign out</a>-->
+<!--                    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">-->
+<!--                        <input hidden type="submit" value="Sign Out" />-->
+<!--                    </form>-->
+<!--                </div>-->
+
+
 
                 </ul>
             </div>

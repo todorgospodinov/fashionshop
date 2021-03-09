@@ -10,12 +10,11 @@ public class UserEntity extends BaseEntity {
     private String username;
     private String password;
     private String fullName;
-    private String email;
     private List<Role> roles = new ArrayList<>();
 
     public UserEntity() {
     }
-    @Column(name="username")
+    @Column(name="username", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -24,7 +23,7 @@ public class UserEntity extends BaseEntity {
         this.username = username;
         return this;
     }
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -33,22 +32,13 @@ public class UserEntity extends BaseEntity {
         this.password = password;
         return this;
     }
-@Column(name="full_name")
+
     public String getFullName() {
         return fullName;
     }
 
     public UserEntity setFullName(String fullName) {
         this.fullName = fullName;
-        return this;
-    }
-    @Column(name="email")
-    public String getEmail() {
-        return email;
-    }
-
-    public UserEntity setEmail(String email) {
-        this.email = email;
         return this;
     }
 

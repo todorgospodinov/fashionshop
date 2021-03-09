@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import softuni.fashionshop.model.binding.UserLoginBindingModel;
 import softuni.fashionshop.model.binding.UserRegistrationBindingModel;
-import softuni.fashionshop.model.service.UserLoginServiceModel;
 import softuni.fashionshop.model.service.UserRegistrationServiceModel;
 import softuni.fashionshop.service.UserService;
 
@@ -38,54 +36,6 @@ import softuni.fashionshop.service.UserService;
         public String login() {
             return "login";
         }
-
-    @PostMapping("/login")
-    public String registerAndLoginUser(
-            @Valid UserLoginBindingModel loginBindingModel,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("loginBindingModel", loginBindingModel);
-            redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.registrationBindingModel", bindingResult);
-
-            return "redirect:/users/login";
-        }
-
-        if (userService.userNameExists(loginBindingModel.getUsername())) {
-            redirectAttributes.addFlashAttribute("loginBindingModel", loginBindingModel);
-            redirectAttributes.addFlashAttribute("userExistsError", true);
-
-            return "redirect:/users/login";
-        }
-
-        UserRegistrationServiceModel userServiceModel = modelMapper
-                .map(loginBindingModel, UserRegistrationServiceModel.class);
-
-        userService.registerAndLoginUser(userServiceModel);
-
-        return "redirect:/home";
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         @GetMapping("/register")
