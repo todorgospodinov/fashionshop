@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import softuni.fashionshop.model.entity.Role;
-import softuni.fashionshop.model.entity.RoleEnum;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.repository.RoleRepository;
 import softuni.fashionshop.repository.UserRepository;
@@ -30,21 +30,27 @@ import java.util.List;
         @Override
         public void run(String... args)  {
 
-            Role userRole = userRoleRepository.save(new Role().setRole(RoleEnum.USER));
-            Role adminRole = userRoleRepository.save(new Role().setRole(RoleEnum.ADMIN));
 
-            //simple user
-            UserEntity user = new UserEntity();
-            user.setUsername("user");
-            user.setPassword(passwordEncoder.encode("topsecret"));
-            user.setRoles(List.of(userRole));
+            if (userRepository.count()==0 ) {
+                Role userRole = userRoleRepository.save(new Role().setRole(RoleEnum.USER));
+                Role adminRole = userRoleRepository.save(new Role().setRole(RoleEnum.ADMIN));
 
-            UserEntity admin = new UserEntity();
-            admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("topsecret"));
-            admin.setRoles(List.of(adminRole, userRole));
+                //simple user
+                UserEntity user = new UserEntity();
+                user.setUsername("user");
+                user.setPassword(passwordEncoder.encode("topsecret"));
+                user.setRoles(List.of(userRole));
 
-            userRepository.save(user);
-            userRepository.save(admin);
+                UserEntity admin = new UserEntity();
+                admin.setUsername("admin");
+                admin.setPassword(passwordEncoder.encode("topsecret"));
+                admin.setRoles(List.of(adminRole, userRole));
+
+                userRepository.save(user);
+                userRepository.save(admin);
+            }
+
         }
+
+
 }

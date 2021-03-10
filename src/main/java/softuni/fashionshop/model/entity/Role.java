@@ -1,6 +1,6 @@
 package softuni.fashionshop.model.entity;
 
-import org.springframework.security.core.GrantedAuthority;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

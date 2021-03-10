@@ -2,7 +2,7 @@ package softuni.fashionshop.service;
 
 import org.springframework.stereotype.Service;
 import softuni.fashionshop.model.entity.Category;
-import softuni.fashionshop.model.entity.CategoryName;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.repository.CategoryRepository;
 
 import java.util.Arrays;
@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void initCategories() {
         if (categoryRepository.count() == 0) {
-            Arrays.stream(CategoryName.values()).forEach(categoryName -> {
-                Category category = new Category(categoryName, "Description for " + categoryName.name());
+            Arrays.stream(CategoryEnum.values()).forEach(categoryEnum -> {
+                Category category = new Category(categoryEnum, "Description for " + categoryEnum.name());
                 categoryRepository.save(category);
             });
 
@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category find(CategoryName categoryName) {
-        return this.categoryRepository.findByCategoryName(categoryName).orElse(null);
+    public Category find(CategoryEnum categoryEnum) {
+        return this.categoryRepository.findByCategoryEnum(categoryEnum).orElse(null);
     }
 }

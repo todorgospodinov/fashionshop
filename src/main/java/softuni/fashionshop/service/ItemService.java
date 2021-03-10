@@ -1,5 +1,6 @@
 package softuni.fashionshop.service;
 
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.model.view.ItemViewModel;
 
@@ -16,11 +17,12 @@ public interface ItemService {
 
     BigDecimal getTotalSum();
 
-//    List<ItemViewModel> findAllItemsByCategoryName(CategoryName categoryName);
+    List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum);
 
     void delete(Long id);
 
 
     void buyById(Long id);
+
 
 }

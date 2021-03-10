@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.fashionshop.model.binding.ItemAddBindingModel;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.service.ItemService;
 
@@ -23,11 +24,7 @@ public class ItemController {
         this.itemService = itemService;
         this.modelMapper = modelMapper;
     }
-//if (!model.containsAttribute("productAddBindingModel")) {
-//            model.addAttribute("productAddBindingModel", new ProductAddBindingModel());
-//
-//        }
-//        return "product-add";
+
 
     @GetMapping("/add")
     public String add(Model model) {
@@ -46,6 +43,16 @@ public class ItemController {
         this.itemService.addItem(this.modelMapper.map(itemAddBindingModel, ItemServiceModel.class));
         return "redirect:/";
     }
+
+    @GetMapping("/all")
+    public String allItems(Model model) {
+        model.addAttribute("shirt",itemService.findAllItemsByCategoryEnum(CategoryEnum.SHIRT));
+        model.addAttribute("shoes",itemService.findAllItemsByCategoryEnum(CategoryEnum.SHOES));
+        model.addAttribute("suit",itemService.findAllItemsByCategoryEnum(CategoryEnum.SUIT));
+
+        return "all-item";
+    }
+
 
     @GetMapping("/buy/{id}")
     public String buyById(@PathVariable Long id){

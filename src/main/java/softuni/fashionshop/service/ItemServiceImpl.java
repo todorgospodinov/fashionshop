@@ -2,8 +2,8 @@ package softuni.fashionshop.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.fashionshop.model.entity.CategoryName;
 import softuni.fashionshop.model.entity.Item;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.repository.ItemRepository;
@@ -28,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void addItem(ItemServiceModel itemServiceModel) {
         Item item = this.modelMapper.map(itemServiceModel, Item.class);
-        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
+        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryEnum()));
         this.itemRepository.saveAndFlush(item);
     }
 
@@ -38,7 +38,7 @@ public class ItemServiceImpl implements ItemService {
 
         return this.itemRepository.findAll().stream().map(item -> {
             ItemViewModel itemViewModel = this.modelMapper.map(item, ItemViewModel.class);
-            itemViewModel.setImgUrl(String.format("/img/%s-%s.jpg", item.getGender(), item.getCategory().getCategoryName().name()));
+            itemViewModel.setImgUrl(String.format("/img/%s-%s.jpg", item.getGender(), item.getCategory().getCategoryEnum().name()));
             return itemViewModel;
         }).collect(Collectors.toList());
     }
@@ -49,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
                 .map(item -> {
                     ItemViewModel itemViewModel = this.modelMapper.map(item, ItemViewModel.class);
 
-                    itemViewModel.setImgUrl(String.format("/img/%s-%s.jpg", item.getGender(), item.getCategory().getCategoryName().name()));
+                    itemViewModel.setImgUrl(String.format("/img/%s-%s.jpg", item.getGender(), item.getCategory().getCategoryEnum().name()));
                     return itemViewModel;
                 }).orElse(null);
     }
@@ -59,13 +59,13 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findTotalItemsSum();
     }
 
-//    @Override
-//    public List<ItemViewModel> findAllItemsByCategoryName(CategoryName categoryName) {
-//        return itemRepository.findAllByCategory_Name(categoryName).stream()
-//                .map(item -> modelMapper
-//                        .map(item,ItemViewModel.class)).collect(Collectors.toList());
-//
-//    }
+    @Override
+    public List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum) {
+        return itemRepository.findAllByCategory_CategoryEnum(categoryEnum).stream()
+                .map(item -> modelMapper
+                        .map(item,ItemViewModel.class)).collect(Collectors.toList());
+    }
+
 
 
     @Override

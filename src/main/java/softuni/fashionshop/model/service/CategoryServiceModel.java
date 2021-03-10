@@ -1,20 +1,20 @@
 package softuni.fashionshop.model.service;
 
-import softuni.fashionshop.model.entity.CategoryName;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 public class CategoryServiceModel {
-    private CategoryName categoryName;
+    private CategoryEnum categoryEnum;
     private String description;
 
     public CategoryServiceModel() {
     }
 
-    public CategoryName getCategoryName() {
-        return categoryName;
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
     }
 
-    public void setCategoryName(CategoryName categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryName(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
     }
 
     public String getDescription() {

@@ -2,7 +2,7 @@ package softuni.fashionshop.model.binding;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
-import softuni.fashionshop.model.entity.CategoryName;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class ItemAddBindingModel {
     private String name;
     private String description;
-    private CategoryName category;
+    private CategoryEnum category;
     private LocalDateTime receivedOn;
     private String imageUrl;
     private BigDecimal price;
@@ -37,11 +37,11 @@ public class ItemAddBindingModel {
         this.description = description;
     }
     @NotNull(message="Enter valid category name!")
-    public CategoryName getCategory() {
+    public CategoryEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryName category) {
+    public void setCategory(CategoryEnum category) {
         this.category = category;
     }
 

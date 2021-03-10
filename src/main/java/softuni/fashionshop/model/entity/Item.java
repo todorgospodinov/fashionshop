@@ -12,15 +12,17 @@ public class Item extends BaseEntity {
 
     private String name;
     private String description;
-     private BigDecimal price;
+    private BigDecimal price;
     private LocalDateTime receivedOn;
-     private String gender;
-     private String imageUrl;
+    private String gender;
+    private Model model;
+    private String imageUrl;
     private Category category;
 
     public Item() {
     }
-@Column(name="name", nullable = false,unique = true)
+
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -28,7 +30,8 @@ public class Item extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    @Column(name="description",nullable = false, columnDefinition = "TEXT")
+
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -36,12 +39,13 @@ public class Item extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    @Column(name="price",nullable = false)
+
+    @Column(name = "price", nullable = false)
     public BigDecimal getPrice() {
         return price;
     }
 
-    @Column(name="received_on",nullable = false)
+    @Column(name = "received_on", nullable = false)
     @PastOrPresent
     public LocalDateTime getReceivedOn() {
         return receivedOn;
@@ -55,15 +59,27 @@ public class Item extends BaseEntity {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-    @Column(name="gender")
+    @Column(name = "gender")
     public String getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public Item setGender(String gender) {
         this.gender = gender;
+        return this;
     }
-    @Column(name="image_url",nullable = false)
+
+    @ManyToOne
+    public Model getModel() {
+        return model;
+    }
+
+    public Item setModel(Model model) {
+        this.model = model;
+        return this;
+    }
+
+    @Column(name = "image_url", nullable = false)
     public String getImageUrl() {
         return imageUrl;
     }

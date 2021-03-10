@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import softuni.fashionshop.model.entity.Role;
-import softuni.fashionshop.model.entity.RoleEnum;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.service.UserRegistrationServiceModel;
 import softuni.fashionshop.repository.RoleRepository;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
+      @Override
     public void seedUsers() {
 
         if (userRepository.count() == 0) {

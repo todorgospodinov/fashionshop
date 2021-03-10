@@ -1,28 +1,30 @@
 package softuni.fashionshop.model.entity;
 
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="categories")
 public class Category extends BaseEntity{
-private CategoryName categoryName;
+private CategoryEnum categoryEnum;
 private String description;
 
     public Category() {
     }
 
-    public Category(CategoryName categoryName, String description) {
-        this.categoryName = categoryName;
+    public Category(CategoryEnum categoryEnum, String description) {
+        this.categoryEnum = categoryEnum;
         this.description = description;
     }
 
     @Enumerated(EnumType.STRING)
-    public CategoryName getCategoryName() {
-        return categoryName;
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
     }
 
-    public void setCategoryName(CategoryName categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
     }
 @Column(name="description",columnDefinition = "TEXT")
     public String getDescription() {
