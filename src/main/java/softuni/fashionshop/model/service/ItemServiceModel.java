@@ -1,4 +1,7 @@
 package softuni.fashionshop.model.service;
+
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
+
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,11 +15,13 @@ public class ItemServiceModel {
     private LocalDateTime receivedOn;
     private String gender;
     private String imageUrl;
-    private CategoryServiceModel category;
+    private CategoryEnum categoryEnum;
 
     public ItemServiceModel() {
     }
-@Id
+
+
+    @Id
     public Long getId() {
         return id;
     }
@@ -76,11 +81,13 @@ public class ItemServiceModel {
         this.gender = gender;
     }
 
-    public CategoryServiceModel getCategory() {
-        return category;
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
     }
 
-    public void setCategory(CategoryServiceModel category) {
-        this.category = category;
+    public ItemServiceModel setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+        return this;
     }
+
 }

@@ -27,9 +27,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void addItem(ItemServiceModel itemServiceModel) {
+
         Item item = this.modelMapper.map(itemServiceModel, Item.class);
-        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryEnum()));
+        item.setCategory(this.categoryService.find(itemServiceModel.getCategoryEnum()));
         this.itemRepository.saveAndFlush(item);
+
     }
 
     @Override

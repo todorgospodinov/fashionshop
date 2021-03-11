@@ -9,6 +9,11 @@ public class CategoryServiceModel {
     public CategoryServiceModel() {
     }
 
+    public CategoryServiceModel setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+        return this;
+    }
+
     public CategoryEnum getCategoryEnum() {
         return categoryEnum;
     }

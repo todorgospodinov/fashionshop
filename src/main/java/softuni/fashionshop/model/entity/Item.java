@@ -15,7 +15,6 @@ public class Item extends BaseEntity {
     private BigDecimal price;
     private LocalDateTime receivedOn;
     private String gender;
-    private Model model;
     private String imageUrl;
     private Category category;
 
@@ -69,15 +68,6 @@ public class Item extends BaseEntity {
         return this;
     }
 
-    @ManyToOne
-    public Model getModel() {
-        return model;
-    }
-
-    public Item setModel(Model model) {
-        this.model = model;
-        return this;
-    }
 
     @Column(name = "image_url", nullable = false)
     public String getImageUrl() {
@@ -90,7 +80,6 @@ public class Item extends BaseEntity {
     }
 
     @ManyToOne
-    @Enumerated(EnumType.STRING)
     public Category getCategory() {
         return category;
     }

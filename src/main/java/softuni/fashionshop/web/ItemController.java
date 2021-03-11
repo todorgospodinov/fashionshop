@@ -44,14 +44,7 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @GetMapping("/all")
-    public String allItems(Model model) {
-        model.addAttribute("shirt",itemService.findAllItemsByCategoryEnum(CategoryEnum.SHIRT));
-        model.addAttribute("shoes",itemService.findAllItemsByCategoryEnum(CategoryEnum.SHOES));
-        model.addAttribute("suit",itemService.findAllItemsByCategoryEnum(CategoryEnum.SUIT));
 
-        return "all-item";
-    }
 
 
     @GetMapping("/buy/{id}")

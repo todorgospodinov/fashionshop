@@ -64,53 +64,6 @@
             <hr>
             <form th:object="${itemAddBindingModel}" th:action="@{/items/add}" method="POST">
 
-
-                <div>
-                    <div class="col-auto">
-                        <label for="inputBrandEnum" class="col-form-label text-light">Brand</label>
-                    </div>
-                    <div class="col-auto">
-                        <select class="browser-default custom-select" id="category" name="category">
-                            <option value="">Select brand</option>
-                            //pravim si masiv ot categoryname
-                            <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.BrandEnum)}"
-                                     th:text="${o}"  th:value="${o}">Shirt</option>
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <small id="brandEnumError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">Must be valid email</small>
-                    </div>
-                </div>
-
-
-
-
-
-                <div>
-                    <div class="col-auto">
-                        <label for="inputModelEnum" class="col-form-label text-light">Model</label>
-                    </div>
-                    <div class="col-auto">
-                        <select class="browser-default custom-select" id="category" name="category">
-                            <option value="">Select model</option>
-                            //pravim si masiv ot enums
-                            <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.ModelEnum)}"
-                                     th:text="${o}"  th:value="${o}">Shirt</option>
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <small id="modelEnumError"
-                               class="invalid-feedback text-light form-text bg-danger rounded">Must be valid email</small>
-                    </div>
-                </div>
-
-
-
-
-
-
-
                 <div>
                     <div class="col-auto">
                         <label for="inputName" class="col-form-label text-light">Name</label>
@@ -157,7 +110,7 @@
                         <select class="browser-default custom-select" id="category" name="category">
                             <option value="">Select category</option>
                             //pravim si masiv ot categoryname
-                            <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.CategoryEnum)}"
+                            <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.CategoryEnum).values()}"
                                      th:text="${o}"  th:value="${o}">Shirt</option>
                         </select>
                     </div>
