@@ -66,6 +66,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
+    @Size(min = 5, max = 20)
     public String getConfirmPassword() {
         return confirmPassword;
     }

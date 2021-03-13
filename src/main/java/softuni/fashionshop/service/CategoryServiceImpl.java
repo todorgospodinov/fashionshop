@@ -29,6 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+
+
 //    @Override
 //    public List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum) {
 //        return null;
@@ -39,7 +41,12 @@ public class CategoryServiceImpl implements CategoryService {
     public Category find(CategoryEnum categoryEnum) {
      return this.categoryRepository.findByCategoryEnum(categoryEnum).orElse(null);
   }
-//
+
+    @Override
+    public Collection<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
 //    @Override
 //    public Collection<Category> getAllCategories() {
 //        return categoryRepository.findAll(Sort.by("categoryEnum"));

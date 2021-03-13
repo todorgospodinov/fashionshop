@@ -10,7 +10,7 @@ import java.util.List;
 public interface CategoryService {
     void initCategories();
     Category find(CategoryEnum categoryEnum);
-   // Collection<Category> getAllCategories();
+    Collection<Category> getAllCategories();
 
     //List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum);
 }
