@@ -47,22 +47,22 @@ public class ItemController {
 
 
 
-    @GetMapping("/buy/{id}")
-    public String buyById(@PathVariable Long id){
-        itemService.buyById(id);
-        return "redirect:/";
-    }
-
-
-    @GetMapping("/details")
-    public ModelAndView details(@RequestParam("id") Long id, ModelAndView modelAndView) {
-        modelAndView.addObject("item", this.itemService.findById(id));
-        modelAndView.setViewName("details-item");
-        return modelAndView;
-    }
-    @GetMapping("/delete/{id}")
-    public String delete (@PathVariable("id")Long id) {
-        this.itemService.delete(id);
-        return "redirect:/";
-    }
+//    @GetMapping("/buy/{id}")
+//    public String buyById(@PathVariable Long id){
+//        itemService.buyById(id);
+//        return "redirect:/";
+//    }
+//
+//
+//    @GetMapping("/details")
+//    public ModelAndView details(@RequestParam("id") Long id, ModelAndView modelAndView) {
+//        modelAndView.addObject("item", this.itemService.findById(id));
+//        modelAndView.setViewName("details-item");
+//        return modelAndView;
+//    }
+//    @GetMapping("/delete/{id}")
+//    public String delete (@PathVariable("id")Long id) {
+//        this.itemService.delete(id);
+//        return "redirect:/";
+//    }
 }

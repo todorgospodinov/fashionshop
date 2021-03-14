@@ -1,28 +1,24 @@
 package softuni.fashionshop.service;
 
-import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.model.service.ItemServiceModel;
-import softuni.fashionshop.model.view.ItemViewModel;
 
-import java.math.BigDecimal;
-import java.util.List;
 
 public interface ItemService {
 
     void addItem(ItemServiceModel itemServiceModel);
 
-    List<ItemViewModel> findAllItems ();
+    //List<ItemViewModel> findAllItems ();
 
-    ItemViewModel findById(Long id);
+   // ItemViewModel findById(Long id);
 
-    BigDecimal getTotalSum();
+   // BigDecimal getTotalSum();
 
-    List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum);
+    //List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum);
 
-    void delete(Long id);
+   // void delete(Long id);
 
 
-    void buyById(Long id);
+  //  void buyById(Long id);
 
 
 }

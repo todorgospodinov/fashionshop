@@ -1,5 +1,7 @@
 package softuni.fashionshop.model.service;
 
+import softuni.fashionshop.model.entity.Brand;
+import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 import javax.persistence.Id;
@@ -16,6 +18,9 @@ public class ItemServiceModel {
     private String gender;
     private String imageUrl;
     private CategoryEnum categoryEnum;
+    private Brand brand;
+
+
 
     public ItemServiceModel() {
     }
@@ -90,4 +95,12 @@ public class ItemServiceModel {
         return this;
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public ItemServiceModel setBrand(Brand brand) {
+        this.brand = brand;
+        return this;
+    }
 }

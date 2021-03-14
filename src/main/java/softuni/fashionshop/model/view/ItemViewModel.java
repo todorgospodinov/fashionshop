@@ -1,7 +1,12 @@
 package softuni.fashionshop.model.view;
 
+import softuni.fashionshop.model.entity.Brand;
+import softuni.fashionshop.model.entity.UserEntity;
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
+
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class ItemViewModel {
     private Long id;
@@ -9,6 +14,9 @@ public class ItemViewModel {
     private String description;
     private BigDecimal price;
     private String imgUrl;
+    private CategoryEnum categoryEnum;
+    private Brand brand;
+
 
     public ItemViewModel() {
     }
@@ -52,5 +60,23 @@ public class ItemViewModel {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
+    }
+
+    public ItemViewModel setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+        return this;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public ItemViewModel setBrand(Brand brand) {
+        this.brand = brand;
+        return this;
     }
 }

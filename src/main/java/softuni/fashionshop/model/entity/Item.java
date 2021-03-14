@@ -1,5 +1,7 @@
 package softuni.fashionshop.model.entity;
 
+import softuni.fashionshop.model.entity.enums.CategoryEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PastOrPresent;
@@ -16,7 +18,9 @@ public class Item extends BaseEntity {
     private LocalDateTime receivedOn;
     private String gender;
     private String imageUrl;
-    private Category category;
+    private CategoryEnum categoryEnum;
+    private Brand brand;
+    private UserEntity userEntity;
 
     public Item() {
     }
@@ -58,6 +62,7 @@ public class Item extends BaseEntity {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
     @Column(name = "gender")
     public String getGender() {
         return gender;
@@ -67,7 +72,6 @@ public class Item extends BaseEntity {
         this.gender = gender;
         return this;
     }
-
 
     @Column(name = "image_url", nullable = false)
     public String getImageUrl() {
@@ -79,13 +83,33 @@ public class Item extends BaseEntity {
         return this;
     }
 
+    @Enumerated(EnumType.STRING)
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
+    }
+
+    public Item setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+        return this;
+    }
+
     @ManyToOne
-    public Category getCategory() {
-        return category;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public Item setBrand(Brand brand) {
+        this.brand = brand;
+        return this;
     }
 
+    @ManyToOne
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public Item setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+        return this;
+    }
 }

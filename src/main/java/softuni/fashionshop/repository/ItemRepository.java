@@ -14,5 +14,5 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
     @Query("SELECT SUM(i.price) FROM Item i")
     BigDecimal findTotalItemsSum();
 
-    List<Item > findAllByCategory_CategoryEnum(CategoryEnum categoryEnum);
+   // List<Item > findAllByCategory_CategoryEnum(CategoryEnum categoryEnum);
 }

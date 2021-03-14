@@ -33,6 +33,7 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
+    @Column(name="fullName")
     public String getFullName() {
         return fullName;
     }
