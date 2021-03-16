@@ -41,7 +41,7 @@ public class ItemController {
             return "redirect:add";
         }
         this.itemService.addItem(this.modelMapper.map(itemAddBindingModel, ItemServiceModel.class));
-        return "redirect:/";
+        return "redirect:add";
     }
 
 

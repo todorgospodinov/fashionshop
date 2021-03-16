@@ -45,7 +45,7 @@ public class CarouselServiceImpl implements CarouselService {
     }
 
 
-    @Scheduled(cron = "* */3 * * * *")
+    @Scheduled(cron = "0 */1 * * * *")
     public void refresh() {
         LOGGER.info("Shuffling images...");
         Collections.shuffle(images);

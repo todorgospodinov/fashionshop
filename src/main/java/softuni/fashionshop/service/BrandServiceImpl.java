@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import softuni.fashionshop.model.entity.Brand;
+import softuni.fashionshop.model.view.BrandViewModel;
 import softuni.fashionshop.repository.BrandRepository;
 
 @Service
 public class BrandServiceImpl implements BrandService {
+
 
     private final Resource brandsFile;
     private final Gson gson;
@@ -42,4 +45,6 @@ public class BrandServiceImpl implements BrandService {
             }
         }
     }
+
+
 }

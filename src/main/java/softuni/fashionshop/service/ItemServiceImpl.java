@@ -5,22 +5,17 @@ import org.springframework.stereotype.Service;
 import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.model.service.ItemServiceModel;
-import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.repository.ItemRepository;
-
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
-    //private final BrandService brandService;
+    private final BrandService brandService;
     private final ModelMapper modelMapper;
 
-    public ItemServiceImpl(ItemRepository itemRepository, ModelMapper modelmapper) {
+    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, ModelMapper modelmapper) {
         this.itemRepository = itemRepository;
+        this.brandService = brandService;
 
         this.modelMapper = modelmapper;
     }
@@ -29,7 +24,9 @@ public class ItemServiceImpl implements ItemService {
     public void addItem(ItemServiceModel itemServiceModel) {
 
         Item item = this.modelMapper.map(itemServiceModel, Item.class);
-       // item.setCategory(this.categoryService.find(itemServiceModel.getCategoryEnum()));
+      // item.setBrand(this.brandService. );
+       // item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
+
         this.itemRepository.saveAndFlush(item);
 
     }
@@ -79,5 +76,34 @@ public class ItemServiceImpl implements ItemService {
 //    public void buyById(Long id) {
 //        itemRepository.deleteById(id);
 //    }
+
+//   @Override
+//    public Offer updateOffer(Offer offer) {
+//        offer.setModified(new Date());
+//        Offer old = getOfferById(offer.getId());
+//        if (old == null) {
+//            throw new EntityNotFoundException(String.format("Offer with ID=%s not found.", offer.getId()));
+//        }
+//        if (offer.getSeller() != null && offer.getSeller().getId() != old.getSeller().getId())
+//            throw new InvalidEntityException("Seller of offer could not ne changed");
+//        offer.setSeller(old.getSeller());
+//        return offerRepo.save(offer);
+//    }
+//
+//    @Override
+//    public Offer deleteOffer(Long id) {
+//        Offer old = offerRepo.findById(id).orElseThrow(() ->
+//                new EntityNotFoundException(String.format("Offer with ID=%s not found.", id)));
+//        offerRepo.deleteById(id);
+//        return old;
+//    }
+//
+//    @Override
+//    public long getOffersCount() {
+//        return offerRepo.count();
+//    }
+
+
+
 
 }
