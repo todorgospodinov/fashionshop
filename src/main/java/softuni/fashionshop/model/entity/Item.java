@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PastOrPresent;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,8 +17,7 @@ public class Item extends BaseEntity {
     private String name;
     private String description;
     private BigDecimal price;
-    private LocalDateTime receivedOn;
-    private String gender;
+    private Instant receivedOn;
     private String imageUrl;
     private CategoryEnum categoryEnum;
     private Brand brand;
@@ -43,35 +44,26 @@ public class Item extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "price", nullable = false)
-    public BigDecimal getPrice() {
-        return price;
-    }
 
     @Column(name = "received_on", nullable = false)
-    @PastOrPresent
-    public LocalDateTime getReceivedOn() {
+    public Instant getReceivedOn() {
         return receivedOn;
     }
 
-    public Item setReceivedOn(LocalDateTime receivedOn) {
+    public Item setReceivedOn(Instant receivedOn) {
         this.receivedOn = receivedOn;
         return this;
+    }
+
+    @Column(name = "price", nullable = false)
+    public BigDecimal getPrice() {
+        return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    @Column(name = "gender")
-    public String getGender() {
-        return gender;
-    }
-
-    public Item setGender(String gender) {
-        this.gender = gender;
-        return this;
-    }
 
     @Column(name = "image_url", nullable = false)
     public String getImageUrl() {

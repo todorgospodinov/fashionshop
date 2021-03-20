@@ -15,16 +15,13 @@ public class ItemServiceModel {
     private String description;
     private BigDecimal price;
     private LocalDateTime receivedOn;
-    private String gender;
     private String imageUrl;
     private CategoryEnum categoryEnum;
-    private Brand brand;
-
-
+    private String brand;
+    private String user;
 
     public ItemServiceModel() {
     }
-
 
     @Id
     public Long getId() {
@@ -78,14 +75,6 @@ public class ItemServiceModel {
         return this;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public CategoryEnum getCategoryEnum() {
         return categoryEnum;
     }
@@ -95,12 +84,21 @@ public class ItemServiceModel {
         return this;
     }
 
-    public Brand getBrand() {
+    public String getBrand() {
         return brand;
     }
 
-    public ItemServiceModel setBrand(Brand brand) {
+    public ItemServiceModel setBrand(String brand) {
         this.brand = brand;
+        return this;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public ItemServiceModel setUser(String user) {
+        this.user = user;
         return this;
     }
 }

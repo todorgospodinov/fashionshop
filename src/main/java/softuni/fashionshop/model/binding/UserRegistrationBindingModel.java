@@ -22,7 +22,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
-    @Size(min = 3)
+    @Size(min = 3, message = "Username length must be more than 3 characters")
     public String getUsername() {
         return username;
     }
@@ -33,7 +33,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
-    @Email
+    @Email(message ="Email must be valid")
     public String getEmail() {
         return email;
     }
@@ -44,7 +44,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
-    @Size(min = 3)
+    @Size(min = 3, message ="Full name length must be more than 3 characters")
     public String getFullName() {
         return fullName;
     }
@@ -55,7 +55,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, message ="Password length must be between 5 and 20 characters and passwords should match")
     public String getPassword() {
         return password;
     }
@@ -66,7 +66,7 @@ public class UserRegistrationBindingModel {
     }
 
     @NotEmpty
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 20, message ="Password length must be between 5 and 20 characters and passwords should match")
     public String getConfirmPassword() {
         return confirmPassword;
     }

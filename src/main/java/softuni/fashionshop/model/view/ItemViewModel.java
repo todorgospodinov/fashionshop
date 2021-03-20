@@ -6,6 +6,7 @@ import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class ItemViewModel {
@@ -14,6 +15,7 @@ public class ItemViewModel {
     private String description;
     private BigDecimal price;
     private String imgUrl;
+    private Instant receivedOn;
     private CategoryEnum categoryEnum;
     private Brand brand;
 
@@ -60,6 +62,16 @@ public class ItemViewModel {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+
+    public Instant getReceivedOn() {
+        return receivedOn;
+    }
+
+    public ItemViewModel setReceivedOn(Instant receivedOn) {
+        this.receivedOn = receivedOn;
+        return this;
     }
 
     public CategoryEnum getCategoryEnum() {

@@ -3,20 +3,20 @@ package softuni.fashionshop.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.fashionshop.model.entity.Item;
-import softuni.fashionshop.model.entity.enums.CategoryEnum;
+import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.repository.ItemRepository;
+import softuni.fashionshop.repository.UserRepository;
 
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
-    private final BrandService brandService;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, ModelMapper modelmapper) {
+    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, UserRepository userRepository, ModelMapper modelmapper) {
         this.itemRepository = itemRepository;
-        this.brandService = brandService;
-
+        this.userRepository = userRepository;
         this.modelMapper = modelmapper;
     }
 
@@ -24,12 +24,19 @@ public class ItemServiceImpl implements ItemService {
     public void addItem(ItemServiceModel itemServiceModel) {
 
         Item item = this.modelMapper.map(itemServiceModel, Item.class);
-      // item.setBrand(this.brandService. );
-       // item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
-
+        UserEntity creator = userRepository.
+                findByUsername(itemServiceModel.getUser()).
+                orElseThrow(() -> new IllegalArgumentException("Creator " + itemServiceModel.getUser() + " could not be found"));
+        item.setUserEntity(creator);
         this.itemRepository.saveAndFlush(item);
 
     }
+
+//    Item item = this.modelmapper.map(itemServiceModel, Item.class);
+//        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
+//        this.itemRepository.saveAndFlush(item);
+
+
 
 //    @Override
 //    public List<ItemViewModel> findAllItems() {

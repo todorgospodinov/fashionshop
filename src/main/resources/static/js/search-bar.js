@@ -7,7 +7,7 @@ fetch("http://localhost:8080/items/api").
 then(response => response.json()).
 then(data => {
     for (let item of data) {
-        allItems.push(data)
+        allItems.push(item)
     }
 })
 

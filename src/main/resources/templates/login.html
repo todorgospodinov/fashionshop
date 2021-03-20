@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <title>Fashion Shop</title>
     <meta charset="utf-8">
@@ -40,6 +40,17 @@
             }
             .row.content {height:auto;}
         }
+
+        input:valid {
+            border:lawngreen solid 2px;
+        }
+        input:invalid{
+            border: red solid 2px;
+        }
+        input:invalid:required{
+            background-image: linear-gradient(to right, lightpink,seashell);
+        }
+
     </style>
 </head>
 <body>
@@ -67,7 +78,11 @@
                         <label for="inputUsername" class="col-form-label text-light">Username</label>
                     </div>
                     <div class="col-auto">
-                        <input   type="text" name="username" th:value="${username}" id="inputUsername" class="form-control"
+                        <input
+                                type="text"
+                                name="username"
+                                required minlength="3" maxlength="20"
+                                th:value="${username}" id="inputUsername" class="form-control"
                                 aria-describedby="usernameHelpInline">
                     </div>
                     <div  class="col-auto">
@@ -80,7 +95,11 @@
                         <label for="inputPassword" class="col-form-label text-light">Password</label>
                     </div>
                     <div class="col-auto">
-                        <input  type="password" name="password"  id="inputPassword" class="form-control"
+                        <input
+                                type="password"
+                                name="password"
+                                required minlength="5" maxlength="20"
+                                id="inputPassword" class="form-control"
                                aria-describedby="passwordHelpInline">
                     </div>
                     <div  class="col-auto">

@@ -1,6 +1,7 @@
 package softuni.fashionshop.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import java.util.List;
 @Table(name="users")
 public class UserEntity extends BaseEntity {
     private String username;
+    private String email;
     private String password;
     private String fullName;
+
     private List<Role> roles = new ArrayList<>();
 
     public UserEntity() {
@@ -21,6 +24,16 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
+    }
+    @Column(name="email", nullable = false)
+    @Email
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
     @Column(name="password", nullable = false)

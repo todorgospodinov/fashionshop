@@ -1,5 +1,6 @@
 package softuni.fashionshop.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -8,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -22,13 +24,15 @@ public class BrandServiceImpl implements BrandService {
     private final Resource brandsFile;
     private final Gson gson;
     private final BrandRepository brandRepository;
+    private final ModelMapper modelMapper;
 
     public BrandServiceImpl(@Value("classpath:import/brands.json") Resource brandsFile,
-                             Gson gson, BrandRepository brandRepository) {
+                            Gson gson, BrandRepository brandRepository, ModelMapper modelMapper) {
 
         this.brandsFile = brandsFile;
         this.gson = gson;
         this.brandRepository = brandRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -46,5 +50,8 @@ public class BrandServiceImpl implements BrandService {
         }
     }
 
-
+    @Override
+    public List<String> findAllBrands() {
+        return brandRepository.findAllBrandsNames();
+    }
 }

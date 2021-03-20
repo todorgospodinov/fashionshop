@@ -36,4 +36,13 @@ public class BrandViewModel {
         this.description = description;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BrandViewModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -8,22 +8,28 @@ import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class ItemAddBindingModel {
     private String name;
     private String description;
-    private CategoryEnum category;
-    private LocalDateTime receivedOn;
-    private Brand brand;
+    private CategoryEnum categoryEnum;
+    private LocalDate receivedOn;
+    private String brand;
     private String imageUrl;
     private BigDecimal price;
 
     public ItemAddBindingModel() {
     }
 
-    @Length(min = 2, message = "Item name length must be more than two characters")
+    public ItemAddBindingModel(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+    }
+
+    @Size(min = 2, message = "Item name length must be more than two characters")
     public String getName() {
         return name;
     }
@@ -32,7 +38,7 @@ public class ItemAddBindingModel {
         this.name = name;
     }
 
-    @Length(min = 3, message = "Description length must be more than three characters")
+    @Size(min = 3, message = "Description length must be more than three characters")
     public String getDescription() {
         return description;
     }
@@ -42,30 +48,34 @@ public class ItemAddBindingModel {
     }
 
     @NotNull(message = "Enter valid category name!")
-    public CategoryEnum getCategory() {
-        return category;
+    public CategoryEnum getCategoryEnum() {
+        return categoryEnum;
     }
 
-    public void setCategory(CategoryEnum category) {
-        this.category = category;
+    public ItemAddBindingModel setCategoryEnum(CategoryEnum categoryEnum) {
+        this.categoryEnum = categoryEnum;
+        return this;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent(message = "Date cannot be in the future")
-    public LocalDateTime getReceivedOn() {
+    public LocalDate getReceivedOn() {
         return receivedOn;
     }
 
-    public ItemAddBindingModel setReceivedOn(LocalDateTime receivedOn) {
+    public ItemAddBindingModel setReceivedOn(LocalDate receivedOn) {
         this.receivedOn = receivedOn;
         return this;
     }
+
+
+
     @NotNull
-    public Brand getBrand() {
+    public String getBrand() {
         return brand;
     }
 
-    public ItemAddBindingModel setBrand(Brand brand) {
+    public ItemAddBindingModel setBrand(String brand) {
         this.brand = brand;
         return this;
     }
@@ -87,6 +97,19 @@ public class ItemAddBindingModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemAddBindingModel{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", categoryEnum=" + categoryEnum +
+                ", receivedOn=" + receivedOn +
+                ", brand=" + brand +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
 
