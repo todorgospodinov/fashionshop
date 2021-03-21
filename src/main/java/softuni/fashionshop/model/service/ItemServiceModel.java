@@ -6,6 +6,7 @@ import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class ItemServiceModel {
@@ -14,7 +15,7 @@ public class ItemServiceModel {
     private String name;
     private String description;
     private BigDecimal price;
-    private LocalDateTime receivedOn;
+    private Instant receivedOn;
     private String imageUrl;
     private CategoryEnum categoryEnum;
     private String brand;
@@ -57,11 +58,11 @@ public class ItemServiceModel {
         this.price = price;
     }
 
-    public LocalDateTime getReceivedOn() {
+    public Instant getReceivedOn() {
         return receivedOn;
     }
 
-    public ItemServiceModel setReceivedOn(LocalDateTime receivedOn) {
+    public ItemServiceModel setReceivedOn(Instant receivedOn) {
         this.receivedOn = receivedOn;
         return this;
     }

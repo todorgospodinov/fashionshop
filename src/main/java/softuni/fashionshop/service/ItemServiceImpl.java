@@ -2,6 +2,7 @@ package softuni.fashionshop.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import softuni.fashionshop.model.entity.Brand;
 import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.service.ItemServiceModel;
@@ -12,11 +13,13 @@ import softuni.fashionshop.repository.UserRepository;
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
+    private final BrandService brandService;
     private final ModelMapper modelMapper;
 
-    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, UserRepository userRepository, ModelMapper modelmapper) {
+    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, UserRepository userRepository, BrandService brandService1, ModelMapper modelmapper) {
         this.itemRepository = itemRepository;
         this.userRepository = userRepository;
+        this.brandService = brandService1;
         this.modelMapper = modelmapper;
     }
 
@@ -28,6 +31,10 @@ public class ItemServiceImpl implements ItemService {
                 findByUsername(itemServiceModel.getUser()).
                 orElseThrow(() -> new IllegalArgumentException("Creator " + itemServiceModel.getUser() + " could not be found"));
         item.setUserEntity(creator);
+
+        Brand brand = brandService.findByName(itemServiceModel.getBrand());
+        item.setBrand(brand);
+
         this.itemRepository.saveAndFlush(item);
 
     }

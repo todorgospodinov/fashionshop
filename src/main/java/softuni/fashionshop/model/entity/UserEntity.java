@@ -26,7 +26,7 @@ public class UserEntity extends BaseEntity {
         this.username = username;
         return this;
     }
-    @Column(name="email", nullable = false)
+    @Column(name="email")
     @Email
     public String getEmail() {
         return email;

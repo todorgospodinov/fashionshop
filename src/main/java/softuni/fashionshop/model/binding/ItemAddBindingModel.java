@@ -58,7 +58,7 @@ public class ItemAddBindingModel {
     }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PastOrPresent(message = "Date cannot be in the future")
+//    @PastOrPresent(message = "Date cannot be in the future")
     public LocalDate getReceivedOn() {
         return receivedOn;
     }

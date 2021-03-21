@@ -3,9 +3,11 @@ package softuni.fashionshop.web;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.repository.ItemRepository;
 
@@ -23,13 +25,9 @@ public class SearchRestController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/search")
-    public List<ItemViewModel> findAll() {
-        return itemRepository.
-                findAll().
-                stream().
-                map(ae -> modelMapper.map(ae, ItemViewModel.class)).
-                collect(Collectors.toList());
+    @GetMapping("/api")
+    public ResponseEntity<List<Item>> findAll() {
+        return ResponseEntity.ok().body(itemRepository.findAll());
     }
 
 }

@@ -45,6 +45,17 @@
                 height: auto;
             }
         }
+        input:valid {
+            border:lawngreen solid 2px;
+        }
+        input:invalid{
+            border: red solid 2px;
+        }
+        input:invalid:required{
+            background-image: linear-gradient(to right, lightpink,seashell);
+        }
+
+
     </style>
 </head>
 <body>
@@ -69,7 +80,9 @@
                         <label for="inputName" class="col-form-label text-light">Name</label>
                     </div>
                     <div class="col-auto">
-                        <input th:field="*{name}" th:errorclass="is-invalid"  name="name" type="text" id="inputName"
+                        <input th:field="*{name}" th:errorclass="is-invalid"
+                               required minlength="2" maxlength="30"
+                               name="name" type="text" id="inputName"
                                class="form-control"
                                aria-describedby="nameHelpInline">
                     </div>
@@ -90,7 +103,9 @@
                     </div>
                     <div class="col-auto">
                         <input th:field="*{description}"
-                               th:errorclass="is-invalid" type="text" name="description"
+                               th:errorclass="is-invalid"
+                               required minlength="2" maxlength="500"
+                               type="text" name="description"
                                id="inputDescription" class="form-control form-control-sm"
                                aria-describedby="descriptionHelpInline">
                     </div>
@@ -107,7 +122,10 @@
                         <label for="inputCategoryEnum" class="col-form-label text-light">Category</label>
                     </div>
                     <div class="col-auto">
-                        <select class="browser-default custom-select" id="inputCategoryEnum" name="categoryEnum">
+                        <select class="browser-default custom-select" id="inputCategoryEnum"
+                                th:errorclass="is-invalid"
+                                required
+                                name="categoryEnum">
                             <option value="">Select category</option>
                             //pravim si masiv ot categoryname
                             <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.CategoryEnum).values()}"
@@ -115,7 +133,9 @@
                         </select>
                     </div>
                     <div class="col-auto">
-                        <small th:if="${#fields.hasErrors('categoryEnum')}" th:errors="*{categoryEnum}" id="categoryEnumError"
+                        <small th:if="${#fields.hasErrors('categoryEnum')}" th:errors="*{categoryEnum}"
+
+                               id="categoryEnumError"
                                class="invalid-feedback text-light form-text bg-danger rounded">You have to choose category </small>
                     </div>
                 </div>
@@ -127,6 +147,7 @@
                     <select th:field="*{brand}" id="brand"
                             name="brand"
                             th:errorclass="is-invalid"
+                            required
                             class="form-control">
                         <option value="">- Select brand -</option>
                         <option
@@ -145,14 +166,14 @@
 
 
 
-
-
                 <div>
                     <div class="col-auto">
                         <label for="inputReceivedOn" class="col-form-label text-light">Received Date</label>
                     </div>
                     <div class="col-auto">
-                        <input th:errorclass="is-invalid" type="datetime-local" name="receivedOn" id="inputReceivedOn"
+                        <input th:errorclass="is-invalid"
+                               required
+                               type="date" name="receivedOn" id="inputReceivedOn"
                                class="form-control"
                                aria-describedby="receivedOnHelpInline">
                     </div>
@@ -169,7 +190,9 @@
                         <label for="inputImageUrl" class="col-form-label text-light">ImageUrl</label>
                     </div>
                     <div class="col-auto">
-                        <input th:field="*{imageUrl}" th:errorclass="bg-danger" type="text" name="imageUrl"
+                        <input th:field="*{imageUrl}" th:errorclass="is-invalid"
+                               required
+                               type="text" name="imageUrl"
                                id="inputImageUrl" class="form-control"
                                aria-describedby="imageHelpInline">
                     </div>
@@ -187,7 +210,9 @@
                         <label for="inputPrice" class="col-form-label text-light">Price</label>
                     </div>
                     <div class="col-auto">
-                        <input th:field="*{price}" th:errorclass="bg-danger" type="number" name="price"
+                        <input th:field="*{price}" th:errorclass="is-invalid"
+                               required min="0"
+                               type="number" name="price"
                                id="inputPrice" class="form-control"
                                aria-describedby="priceHelpInline">
                     </div>

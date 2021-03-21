@@ -18,13 +18,13 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/cloud")
     public String add(Model model, @ModelAttribute("competitionServiceModel")
             CompetitionServiceModel competitionServiceModel) throws IOException {
         this.competitionService.addCompetition(competitionServiceModel);
         model.addAttribute("competitions", this. competitionService.findAll());
 
-        return "home";
+        return "competition";
     }
 
 }

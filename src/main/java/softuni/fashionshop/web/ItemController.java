@@ -56,7 +56,11 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
                 .map(itemAddBindingModel,ItemServiceModel.class);
 
       itemServiceModel.setUser(principal.getUsername());
+// Instant to  LocalDateTime
+      itemServiceModel.setReceivedOn(itemAddBindingModel.getReceivedOn()
+              .atStartOfDay(ZoneId.systemDefault()).toInstant());
 
+      itemService.addItem(itemServiceModel);
         return "redirect:/home";
     }
 
@@ -68,8 +72,8 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
 //
 //   albumServiceModel.setReleaseDate(albumAddBindingModel
 //           .getReleaseDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-////    albumService.createAlbum(albumServiceModel);
-////    return "redirect:/home";
+//    albumService.createAlbum(albumServiceModel);
+//    return "redirect:/home";
 //  }
 
 }

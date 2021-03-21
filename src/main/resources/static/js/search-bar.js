@@ -11,20 +11,45 @@ then(data => {
     }
 })
 
-//TODO: add key listener to the search
+console.log(allItems)
 
-//TODO: create method that adds an album...
+searchBar.addEventListener('keyup', (e) => {
+    const searchingCharacters = searchBar.value.toLowerCase();
+    let filteredItems = allItems.filter(item => {
+        return item.name.toLowerCase().includes(searchingCharacters)
+            || item.artistEntity.name.toLowerCase().includes(searchingCharacters);
+    });
+    displayItems(filteredItems);
+})
 
-//const albumsList = document.getElementById('albumsList')
-// const searchBar = document.getElementById('searchInput')
-//
-// const allAlbums = [];
-//
-// fetch("http://localhost:8080/albums/api").
-//   then(response => response.json()).
-//   then(data => {
-//     for (let album of data) {
-//       allAlbums.push(data)
-//     }
-// })
-//
+
+const displayItems = (items) => {
+    itemsList.innerHTML = items
+        .map((i) => {
+            return ` <div class="col-md-3" >
+                <div class="card mb-4 box-shadow">
+                <img src="${i.imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p class="card-text border-bottom ">Name: ${i.name}</p>
+                        <p class="card-text border-bottom ">Brand: ${i.brand.name}</p>
+                        <p class="card-text border-bottom ">Type: ${i.categoryEnum}</p>
+                        <p class="card-text border-bottom ">Price: ${i.price}</p>
+                        <p class="card-text border-bottom">ReceivedOn: ${i.receivedOn}</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="/items/details/${i.id}"  type="button" class="btn btn-sm btn-outline-secondary">Details</a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="/items/delete/${i.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>`
+        })
+        .join('');
+    }

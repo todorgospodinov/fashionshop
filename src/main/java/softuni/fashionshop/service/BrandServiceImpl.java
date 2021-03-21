@@ -54,4 +54,10 @@ public class BrandServiceImpl implements BrandService {
     public List<String> findAllBrands() {
         return brandRepository.findAllBrandsNames();
     }
+
+    @Override
+    public Brand findByName(String brand) {
+        return brandRepository.findByName(brand)
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }
