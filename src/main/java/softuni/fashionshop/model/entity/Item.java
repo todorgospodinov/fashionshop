@@ -19,6 +19,7 @@ public class Item extends BaseEntity {
     private BigDecimal price;
     private Instant receivedOn;
     private String imageUrl;
+    private String videoUrl;
     private CategoryEnum categoryEnum;
     private Brand brand;
     private UserEntity userEntity;
@@ -72,6 +73,15 @@ public class Item extends BaseEntity {
 
     public Item setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+    @Column(name = "video_url")
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public Item setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
         return this;
     }
 

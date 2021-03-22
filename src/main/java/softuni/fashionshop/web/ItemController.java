@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.fashionshop.model.binding.ItemAddBindingModel;
 import softuni.fashionshop.model.service.ItemServiceModel;
+import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.service.BrandService;
 import softuni.fashionshop.service.ItemService;
 
@@ -64,16 +65,16 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
         return "redirect:/home";
     }
 
-// AlbumServiceModel albumServiceModel = modelMapper.map(
-//        albumAddBindingModel,
-//        AlbumServiceModel.class);
-//
-//    albumServiceModel.setUser(principal.getUsername());
-//
-//   albumServiceModel.setReleaseDate(albumAddBindingModel
-//           .getReleaseDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
-//    albumService.createAlbum(albumServiceModel);
-//    return "redirect:/home";
-//  }
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable Long id, Model model){
+
+        ItemViewModel itemViewModel = itemService.findById(id);
+
+        model.addAttribute("item", itemViewModel);
+
+        return "details";
+    }
+
+
 
 }

@@ -11,13 +11,13 @@ then(data => {
     }
 })
 
-console.log(allItems)
+console.log(allItems);
 
 searchBar.addEventListener('keyup', (e) => {
     const searchingCharacters = searchBar.value.toLowerCase();
     let filteredItems = allItems.filter(item => {
         return item.name.toLowerCase().includes(searchingCharacters)
-            || item.artistEntity.name.toLowerCase().includes(searchingCharacters);
+            || item.brand.name.toLowerCase().includes(searchingCharacters);
     });
     displayItems(filteredItems);
 })
@@ -26,7 +26,7 @@ searchBar.addEventListener('keyup', (e) => {
 const displayItems = (items) => {
     itemsList.innerHTML = items
         .map((i) => {
-            return ` <div class="col-md-3" >
+            return `  <div class="col-md-3" >
                 <div class="card mb-4 box-shadow">
                 <img src="${i.imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
@@ -36,8 +36,7 @@ const displayItems = (items) => {
                         <p class="card-text border-bottom ">Name: ${i.name}</p>
                         <p class="card-text border-bottom ">Brand: ${i.brand.name}</p>
                         <p class="card-text border-bottom ">Type: ${i.categoryEnum}</p>
-                        <p class="card-text border-bottom ">Price: ${i.price}</p>
-                        <p class="card-text border-bottom">ReceivedOn: ${i.receivedOn}</p>
+                       
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">

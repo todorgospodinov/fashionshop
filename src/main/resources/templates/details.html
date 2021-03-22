@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        .navbar {
+            margin-bottom: 50px;
+            border-radius: 0;
+        }
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Online Store</h1>
+        <p>Mission, Vission & Values</p>
+    </div>
+</div>
+
+<th:block th:include="~{fragments/nav}" >  </th:block>
+
+
+
+<div class="container">
+    <div th:object="${item}" class="row rounded mb-5 mt-3">
+        <div    class="col-md-6 bg-blur text-light rounded ">
+            <dl class="row pt-3">
+
+
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9" th:text="*{name}">Name</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9" th:text="*{description}">Description
+                </dd>
+
+                <dt class="col-sm-3">Brand</dt>
+                <dd class="col-sm-9" th:text="*{brand}">Artist
+                </dd>
+
+                <dt class="col-sm-3">Received On</dt>
+                <dd class="col-sm-9" th:text="*{receivedOn}">Received On
+                </dd>
+
+                <dt class="col-sm-3">Price & Copies</dt>
+                <dd class="col-sm-9">
+                    <dl class="row">
+                        <dt class="col-sm-4">Price</dt>
+                        <dd class="col-sm-8" th:text="*{price}">Price
+                        </dd>
+                    </dl>
+<!--                    <dl class="row">-->
+<!--                        <dt class="col-sm-4">Copies</dt>-->
+<!--                        <dd class="col-sm-8" th:text="*{copies}">Copies-->
+<!--                        </dd>-->
+<!--                    </dl>-->
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6 bg-transparent rounded">
+            <div class="rounded embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" th:src="'https://www.youtube.com/embed/' + *{videoUrl}"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+
+<th:block th:include="~{fragments/footer}" >  </th:block>
+
+</body>
+</html>

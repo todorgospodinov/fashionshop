@@ -6,6 +6,7 @@ import softuni.fashionshop.model.entity.Brand;
 import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.service.ItemServiceModel;
+import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.repository.ItemRepository;
 import softuni.fashionshop.repository.UserRepository;
 
@@ -34,10 +35,29 @@ public class ItemServiceImpl implements ItemService {
 
         Brand brand = brandService.findByName(itemServiceModel.getBrand());
         item.setBrand(brand);
-
         this.itemRepository.saveAndFlush(item);
+    }
+
+    @Override
+    public ItemViewModel findById(Long id) {
+        return itemRepository.findById(id)
+                .map(item -> {
+                 ItemViewModel itemViewModel = modelMapper
+                 .map(item,ItemViewModel.class);
+                    itemViewModel.setBrand(item.getBrand().getName());
+                    return itemViewModel;
+
+                }).orElseThrow(IllegalArgumentException::new);
 
     }
+
+    @Override
+    public Item findEntityById(Long itemId) {
+        return itemRepository.findById(itemId)
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+
 
 //    Item item = this.modelmapper.map(itemServiceModel, Item.class);
 //        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
@@ -116,8 +136,6 @@ public class ItemServiceImpl implements ItemService {
 //    public long getOffersCount() {
 //        return offerRepo.count();
 //    }
-
-
 
 
 }

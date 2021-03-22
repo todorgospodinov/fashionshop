@@ -27,6 +27,7 @@ public class SearchRestController {
 
     @GetMapping("/api")
     public ResponseEntity<List<Item>> findAll() {
+
         return ResponseEntity.ok().body(itemRepository.findAll());
     }
 

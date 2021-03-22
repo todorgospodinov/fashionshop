@@ -20,6 +20,7 @@ public class ItemAddBindingModel {
     private LocalDate receivedOn;
     private String brand;
     private String imageUrl;
+    private String videoUrl;
     private BigDecimal price;
 
     public ItemAddBindingModel() {
@@ -89,6 +90,15 @@ public class ItemAddBindingModel {
         this.imageUrl = imageUrl;
         return this;
     }
+    @NotNull(message = "Enter valid video URL!")
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public ItemAddBindingModel setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+        return this;
+    }
 
     @DecimalMin(value = "0", message = "Enter valid price")
     public BigDecimal getPrice() {
@@ -106,8 +116,9 @@ public class ItemAddBindingModel {
                 ", description='" + description + '\'' +
                 ", categoryEnum=" + categoryEnum +
                 ", receivedOn=" + receivedOn +
-                ", brand=" + brand +
+                ", brand='" + brand + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
                 ", price=" + price +
                 '}';
     }
