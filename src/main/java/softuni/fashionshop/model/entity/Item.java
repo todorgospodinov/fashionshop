@@ -75,7 +75,7 @@ public class Item extends BaseEntity {
         this.imageUrl = imageUrl;
         return this;
     }
-    @Column(name = "video_url")
+    @Column(name = "video_url", nullable = false)
     public String getVideoUrl() {
         return videoUrl;
     }

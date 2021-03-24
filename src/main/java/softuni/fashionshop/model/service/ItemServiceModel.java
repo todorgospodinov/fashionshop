@@ -17,6 +17,7 @@ public class ItemServiceModel {
     private BigDecimal price;
     private Instant receivedOn;
     private String imageUrl;
+    private String videoUrl;
     private CategoryEnum categoryEnum;
     private String brand;
     private String user;
@@ -73,6 +74,15 @@ public class ItemServiceModel {
 
     public ItemServiceModel setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public ItemServiceModel setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
         return this;
     }
 

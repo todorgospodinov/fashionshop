@@ -29,10 +29,10 @@
 
                 <ul class="nav navbar-nav">
 
-                    <li><a href="#">About us</a></li>
-                    <li ><a th:href="@{/}">Products</a></li>
-                    <li><a href="#">Stores</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li  ><a th:href="@{/about}">About us</a></li>
+                    <li sec:authorize="isAuthenticated()"> <a th:href="@{/home}">Products</a></li>
+                    <li ><a th:href="@{/stores}">Stores</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/competition}">Competition</a></li>
                 </ul>
 
 

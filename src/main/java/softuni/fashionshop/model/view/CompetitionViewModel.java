@@ -4,7 +4,8 @@ import javax.persistence.Id;
 
 public class CompetitionViewModel {
     private Long id;
-    private String imageUrl;
+    private String name;
+    private String imgUrl;
 
     public CompetitionViewModel() {
     }
@@ -18,12 +19,21 @@ public class CompetitionViewModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getName() {
+        return name;
     }
 
-    public CompetitionViewModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public CompetitionViewModel setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public CompetitionViewModel setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
         return this;
     }
 }

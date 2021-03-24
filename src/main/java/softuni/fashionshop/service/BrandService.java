@@ -8,7 +8,8 @@ import java.util.List;
 public interface BrandService {
 
     void seedBrands();
-List<String> findAllBrands();
+
+    List<String> findAllBrands();
 
     Brand findByName(String brand);
 }

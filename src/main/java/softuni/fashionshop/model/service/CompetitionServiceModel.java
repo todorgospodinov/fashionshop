@@ -3,10 +3,13 @@ package softuni.fashionshop.model.service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 
 public class CompetitionServiceModel {
     private Long id;
-    private MultipartFile imageUrl;
+    private String name;
+    private MultipartFile img;
+
 
     public CompetitionServiceModel() {
     }
@@ -20,12 +23,21 @@ public class CompetitionServiceModel {
         return this;
     }
 
-    public MultipartFile getImageUrl() {
-        return imageUrl;
+    public MultipartFile getImg() {
+        return img;
     }
 
-    public CompetitionServiceModel setImageUrl(MultipartFile imageUrl) {
-        this.imageUrl = imageUrl;
+    public CompetitionServiceModel setImg(MultipartFile img) {
+        this.img = img;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public CompetitionServiceModel setName(String name) {
+        this.name = name;
         return this;
     }
 }
