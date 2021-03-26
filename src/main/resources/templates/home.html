@@ -65,10 +65,11 @@
 
             <form id="add-article-form" class="form w-25 mx-auto" th:action="@{/cloud}" th:method="POST"
                   enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="add-article-title" class="font-weight-bold">Name</label>
-                                <input type="text" class="form-control text-center" id="add-article-title" name="name" required="required">
-                            </div>
+                <div class="form-group">
+                    <label for="add-article-title" class="font-weight-bold">Name</label>
+                    <input type="text" class="form-control text-center" id="add-article-title" name="name"
+                           required="required">
+                </div>
                 <div class="form-group">
                     <label for="add-title-image" class="font-weight-bold"> Your Picture</label>
                     <input type="file" class="form-control-file" id="add-title-image" name="img" required="required">
@@ -90,26 +91,39 @@
             </div>
 
             <div class="row mt-5" id="itemsList">
-                <div class="col-md-3">
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/logo/Giorgio-Armani.jpg}" class="card-img-top" alt="Thumbnail [100%x225]"
-                             data-holder-rendered="true"
-                             style="height: 225px; width: 100%; display: block;" >
-                    </div>
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/logo/Symbole-Hermes.jpg}" class="card-img-top" alt="Thumbnail [100%x225]"
-                             data-holder-rendered="true"
-                             style="height: 225px; width: 100%; display: block;">
-                    </div>
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/logo/bode-logo.jpg}" class="card-img-top" alt="Thumbnail [100%x225]"
-                             data-holder-rendered="true"
-                             style="height: 225px; width: 100%; display: block;">
-                    </div>
+
+                    <table class="table">
+                        <tr>
+                            <th scope="col">
+                                <div class="card mb-4 box-shadow">
+                                    <img th:src="@{/images/logo/Giorgio-Armani.jpg}" class="rounded mx-auto d-block"
+                                         alt="Thumbnail [100%x225]"
+                                         data-holder-rendered="true"
+                                         style="height: 25%; width: 30%; display: block;">
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="card mb-4 box-shadow">
+                                    <img th:src="@{/images/logo/Symbole-Hermes.jpg}" class="rounded mx-auto d-block"
+                                         alt="Thumbnail [100%x225]"
+                                         data-holder-rendered="true"
+                                         style="height: 25%; width: 30%; display: block;" >
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="card mb-4 box-shadow">
+                                    <img th:src="@{/images/logo/bode-logo.jpg}" class="rounded mx-auto d-block"
+                                         alt="Thumbnail [100%x225]"
+                                         data-holder-rendered="true"
+                                         style="height: 25%; width: 30%; display: block;"  >
+                                </div>
+                            </th>
+
+                        <tr>
+                    </table>
+
 
                 </div>
-
-            </div>
 
         </div>
 

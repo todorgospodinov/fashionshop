@@ -14,7 +14,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" th:href="@{/stats}">Statistics</a>
                         <a class="dropdown-item" th:href="@{/items/add}" >Add item</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" th:href="@{/statistics}">Items stats</a>
                     </div>
 
                 </div>
@@ -32,7 +32,7 @@
                     <li  ><a th:href="@{/about}">About us</a></li>
                     <li sec:authorize="isAuthenticated()"> <a th:href="@{/home}">Products</a></li>
                     <li ><a th:href="@{/stores}">Stores</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/competition}">Competition</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/cloud}">Competition</a></li>
                 </ul>
 
 
