@@ -12,6 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+//Test Rest Controller
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
@@ -29,6 +31,5 @@ public class StatsControllerTest {
                 .andExpect(view().name("stats"))
                 .andExpect(model().attributeExists("requestCount", "startedOn"));
     }
-
 
 }

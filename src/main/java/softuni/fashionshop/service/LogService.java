@@ -8,4 +8,6 @@ public interface LogService {
     void createLog(String action, Long itemId);
 
     List<LogServiceModel> findAllLogs();
+
+
 }
