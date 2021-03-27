@@ -1,136 +1,117 @@
 //package softuni.fashionshop.web;
 //
-//import static org.hamcrest.Matchers.hasSize;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.times;
-//import static org.mockito.Mockito.when;
 //
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+//import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static org.hamcrest.Matchers.is;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 //
-//import com.fasterxml.jackson.databind.ObjectMapper;
+//
+//import java.math.BigDecimal;
+//import java.time.LocalDate;
+//import java.time.ZoneId;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
-//import org.mockito.ArgumentCaptor;
-//import org.mockito.Mockito;
-//import org.mockito.stubbing.Answer;
 //import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
+//import org.springframework.security.test.context.support.WithMockUser;
 //import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.RequestBuilder;
+//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+//import softuni.fashionshop.model.entity.Brand;
+//
 //import softuni.fashionshop.model.entity.Item;
+//import softuni.fashionshop.model.entity.UserEntity;
+//import softuni.fashionshop.model.entity.enums.CategoryEnum;
+//import softuni.fashionshop.repository.BrandRepository;
 //import softuni.fashionshop.repository.ItemRepository;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
+//import softuni.fashionshop.repository.UserRepository;
+////integration test
+////vdiga celiq testovi context na SpringBoot
 //@SpringBootTest
+////s nego mojem da isprastame get i post zaqvki
 //@AutoConfigureMockMvc
+//@AutoConfigureTestDatabase
 //public class ItemControllerTest {
+//
+//    private static final String ITEM_CONTROLLER_PREFIX = "/items";
+//
+//    private long testItemId;
 //
 //    @Autowired
 //    private MockMvc mockMvc;
 //
 //    @Autowired
-//    private ObjectMapper objectMapper;
-//
-//    @MockBean
-//    private ItemRepository mockItemRepository;
-//
-//    private Item item1;
-//    private Item item2;
-//
-//    private Long NEW_ITEM_ID;
-//    private Long NON_EXISTING_ITEM_ID;
-//
+//    private UserRepository userRepository;
+//    @Autowired
+//    private BrandRepository brandRepository;
+//    @Autowired
+//    private ItemRepository itemRepository;
 //
 //    @BeforeEach
-//    public void setUp() {
-//
-//        item1 = new Item().setId(1).setName("Author 1");
-//        item2 = new Item().setId(2).setName("Author 2");
-//
-//        when(mockItemRepository.findById(item1.getId())).thenReturn(Optional.of(item1));
-//        when(mockItemRepository.findById(item2.getId())).thenReturn(Optional.of(item2));
-//        when(mockItemRepository.findAll()).thenReturn(List.of(item1, item2));
-//
-//        when(mockItemRepository.save(any())).thenAnswer(
-//                (Answer<Item>) invocation -> {
-//                    Item itemToSave = invocation.getArgument(0);
-//                    itemToSave.setId((long)NEW_ITEM_ID);
-//                    return itemToSave;
-//                }
-//        );
+//    public void setup() {
+//        this.init();
 //    }
 //
 //    @Test
-//    public void testAuthorsReturnsCorrectStatusCode() throws Exception {
-//        this.mockMvc.perform(get("/items")).
-//                andExpect(status().isOk());
-//    }
-//
-//
-//
-//    @Test
-//    public void testAuthorNotFound() throws Exception {
-//        this.mockMvc.perform(get("/items/{id}", NON_EXISTING_ITEM_ID)).
-//                andExpect(status().isNotFound());
-//    }
-//
-//    @Test
-//    public void testAuthor1Found() throws Exception {
-//        this.mockMvc.
-//                perform(get("/authors/{id}", item1.getId())).
+//    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+//    void testShouldReturnValidStatusViewNameAndModel() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get(
+//                ITEM_CONTROLLER_PREFIX + "/details/{id}", testItemId
+//        )).
 //                andExpect(status().isOk()).
-//                andExpect(jsonPath("$.name", is(item1.getName())));
+//                andExpect(view().name("details")).
+//                andExpect(model().attributeExists("item"));
 //    }
 //
 //    @Test
-//    public void testAuthor2Found() throws Exception {
-//        this.mockMvc.
-//                perform(get("/authors/{id}", item2.getId())).
-//                andExpect(status().isOk()).
-//                andExpect(jsonPath("$.name", is(item2.getName())));
+//    //izpozva se kogato trqbva authentificaciq sus security - suzdava pravilen context
+//    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+//    void addItem() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.post(ITEM_CONTROLLER_PREFIX + "/add")
+//                .param("name", "test item").
+//                        param("category", CategoryEnum.SHIRT.name()).
+//                        param("imageUrl", "http://example.com/image.png").
+//                        param("videoUrl", "_fKAsvJrFes").
+//                        param("description", "Description test").
+//                        param("price", "10").
+//                        param("receivedOn", "2000-01-01").
+//                        param("brand", "Armani").
+//                        with(csrf())).
+//                andExpect(status().is3xxRedirection());
+//
+//        Assertions.assertEquals(2, itemRepository.count());
+//        //todo: may verify the created album properties
 //    }
 //
-//    @Test
-//    public void testAllAuthors() throws Exception {
-//        this.mockMvc.
-//                perform(get("/authors")).
-//                andExpect(status().isOk()).
-//                andExpect(jsonPath("$", hasSize(2))).
-//                andExpect(jsonPath("$.[0].id", is( item1.getId()))).
-//                andExpect(jsonPath("$.[0].name", is(item1.getName()))).
-//                andExpect(jsonPath("$.[1].id", is( item2.getId()))).
-//                andExpect(jsonPath("$.[1].name", is(item2.getName())));
+//    private void init() {
+//        Brand brandEntity = new Brand();
+//        brandEntity.setName("Armani");
+//        brandEntity.setDescription("Some info about metallica");
+//        brandEntity = brandRepository.save(brandEntity);
+//
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setUsername("pesho").setPassword("xyz").setFullName("petar petrov");
+//        userEntity = userRepository.save(userEntity);
+//
+//        Item itemEntity = new Item();
+//                itemEntity.
+//                setName("teniska").
+//                setImageUrl("https://upload.wikimedia.org/wikipedia/en/b/bd/Metallica_-_...And_Justice_for_All_cover.jpg").
+//                setVideoUrl("_fKAsvJrFes").
+//                setDescription("Sample description").
+//                setPrice(BigDecimal.TEN).
+//                setRecivedOn(LocalDate.of(1988, 3, 3)
+//                        .atStartOfDay(ZoneId.systemDefault()).toInstant()).
+//                setCategoryEnum(CategoryEnum.SHIRT).
+//                setBrand(brandEntity).
+//                setUserEntity(userEntity);
+//
+//
+//        itemEntity = itemRepository.save(itemEntity);
+//        testItemId = itemEntity.getId();
 //    }
-//
-//    @Test
-//    public void testCreateNewAuthor() throws Exception {
-//        Item newAuthorExpected = new Item().setName("NEW AUTHOR");
-//        String json = objectMapper.writeValueAsString(newAuthorExpected);
-//
-//        this.mockMvc.perform(
-//                post("/authors").
-//                        contentType(MediaType.APPLICATION_JSON).
-//                        content(json).
-//                        accept(MediaType.APPLICATION_JSON)).
-//                andExpect(status().isCreated());
-//
-//        ArgumentCaptor<Item> argument = ArgumentCaptor.forClass(Item.class);
-//        Mockito.verify(mockItemRepository, times(1)).save(argument.capture());
-//
-//        Item newAuthorActual = argument.getValue();
-//
-//        Assertions.assertEquals(newAuthorExpected.getName(), newAuthorActual.getName());
-//        Assertions.assertEquals(NEW_ITEM_ID, newAuthorActual.getId());
-//    }
-//
 //}
+//
