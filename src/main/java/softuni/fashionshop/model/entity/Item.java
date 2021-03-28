@@ -32,8 +32,9 @@ public class Item extends BaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public Item setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
@@ -41,8 +42,9 @@ public class Item extends BaseEntity {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Item setDescription(String description) {
         this.description = description;
+        return this;
     }
 
 
@@ -61,8 +63,9 @@ public class Item extends BaseEntity {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public Item setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
 

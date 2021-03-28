@@ -41,6 +41,7 @@ public class ItemController {
 
         return "add-item";
     }
+
     @PostMapping("/add")
     public String addConfirm(@Valid ItemAddBindingModel itemAddBindingModel,
                                 BindingResult bindingResult,
@@ -51,7 +52,6 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.itemAddBindingModel", bindingResult);
             return "redirect:add";
         }
-
 
         ItemServiceModel itemServiceModel = modelMapper
                 .map(itemAddBindingModel,ItemServiceModel.class);
@@ -74,7 +74,5 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
 
         return "details";
     }
-
-
 
 }

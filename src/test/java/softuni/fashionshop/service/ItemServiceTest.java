@@ -1,3 +1,11 @@
+package softuni.fashionshop.service;
+
+public class ItemServiceTest {
+
+
+
+}
+
 //package softuni.fashionshop.service;
 //
 //import org.junit.Test;
@@ -13,17 +21,6 @@
 //
 //    }
 //}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
