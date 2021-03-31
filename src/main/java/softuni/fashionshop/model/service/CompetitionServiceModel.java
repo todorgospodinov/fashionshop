@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 public class CompetitionServiceModel {
     private Long id;

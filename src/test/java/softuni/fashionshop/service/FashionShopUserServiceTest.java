@@ -19,6 +19,8 @@ import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.repository.UserRepository;
 
+//unit test JUnit5
+
 @ExtendWith(MockitoExtension.class)
 public class FashionShopUserServiceTest {
 

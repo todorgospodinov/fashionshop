@@ -26,9 +26,19 @@ public class SearchRestController {
     }
 
     @GetMapping("/api")
-    public ResponseEntity<List<Item>> findAll() {
+    public ResponseEntity<List<ItemViewModel>> findAll() {
+List<ItemViewModel>itemViewModels = itemRepository.
+        findAll().
+        stream().
+        map(ie->{
+            ItemViewModel viewModel = modelMapper.map(ie,ItemViewModel.class);
+            viewModel.setBrand(ie.getBrand().getName());
+        return viewModel;
+        }).
+        collect(Collectors.toList());
 
-        return ResponseEntity.ok().body(itemRepository.findAll());
+
+        return ResponseEntity.ok().body(itemViewModels);
     }
 
 }

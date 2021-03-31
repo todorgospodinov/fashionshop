@@ -1,38 +1,24 @@
 package softuni.fashionshop.web;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.ZoneId;
-
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import softuni.fashionshop.model.entity.Brand;
-
-import softuni.fashionshop.model.entity.Item;
-import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.entity.enums.CategoryEnum;
 import softuni.fashionshop.repository.BrandRepository;
 import softuni.fashionshop.repository.ItemRepository;
+import softuni.fashionshop.repository.LogRepository;
 import softuni.fashionshop.repository.UserRepository;
-import softuni.fashionshop.service.CloudinaryService;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //integration test
 //vdiga celiq testovi context na SpringBoot
@@ -42,11 +28,8 @@ import softuni.fashionshop.service.CloudinaryService;
 @AutoConfigureTestDatabase
 public class ItemControllerTest {
 
-
-
-    private long testItemId;
-
     private static final String ITEM_CONTROLLER_PREFIX = "/items";
+    private long testItemId;
 
     @Autowired
     private MockMvc mockMvc;
@@ -57,15 +40,24 @@ public class ItemControllerTest {
     private BrandRepository brandRepository;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private LogRepository logRepository;
+    private ItemTestData testData;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
+        testData = new ItemTestData(userRepository, brandRepository, itemRepository, logRepository);
+        testData.init();
+        testItemId = testData.getTestItemId();
+    }
 
-        this.init();
+    @AfterEach
+    public void tearDown() {
+        testData.cleanUp();
     }
 
     @Test
-    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+    @WithMockUser(value = "tosho", roles = {"USER", "ADMIN"})
     void testShouldReturnValidStatusViewNameAndModel() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(
                 ITEM_CONTROLLER_PREFIX + "/details/{id}", testItemId
@@ -77,7 +69,7 @@ public class ItemControllerTest {
 
     @Test
     //izpozva se kogato trqbva authentificaciq sus security - suzdava pravilen context
-    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+    @WithMockUser(value = "tosho", roles = {"USER", "ADMIN"})
     void addItem() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(ITEM_CONTROLLER_PREFIX + "/add")
                 .param("name", "test item").
@@ -92,36 +84,9 @@ public class ItemControllerTest {
                 andExpect(status().is3xxRedirection());
 
         Assertions.assertEquals(2, itemRepository.count());
-        //todo: may verify the created album properties
+
     }
 
-    private void init() throws IOException {
 
-        Brand brandEntity = new Brand();
-        brandEntity.setName("Armani");
-        brandEntity.setDescription("Some info about Armani");
-        brandEntity = brandRepository.save(brandEntity);
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername("tosho").setPassword("12345").setFullName("Tosho Toshev");
-        userEntity = userRepository.save(userEntity);
-
-        Item itemEntity = new Item();
-        itemEntity.
-                setName("teniska").
-                setImageUrl("https://img.giglio.com/images/prodZoom/321320.009_3.jpg").
-                setVideoUrl("zundkVVEOiY").
-                setDescription("Sample description").
-                setPrice(BigDecimal.TEN).
-                setReceivedOn(LocalDate.of(2018, 3, 3)
-                        .atStartOfDay(ZoneId.systemDefault()).toInstant()).
-                setCategoryEnum(CategoryEnum.SHIRT).
-                setBrand(brandEntity).
-                setUserEntity(userEntity);
-
-
-        itemEntity = itemRepository.save(itemEntity);
-        testItemId = itemEntity.getId();
-    }
 }
 

@@ -2,6 +2,7 @@ package softuni.fashionshop.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import softuni.fashionshop.exceptions.ObjectNotFoundException;
 import softuni.fashionshop.model.entity.Brand;
 import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.entity.UserEntity;
@@ -17,12 +18,14 @@ public class ItemServiceImpl implements ItemService {
     private final BrandService brandService;
     private final ModelMapper modelMapper;
 
-    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, UserRepository userRepository, BrandService brandService1, ModelMapper modelmapper) {
+
+    public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, UserRepository userRepository, ModelMapper modelmapper) {
         this.itemRepository = itemRepository;
         this.userRepository = userRepository;
-        this.brandService = brandService1;
+        this.brandService = brandService;
         this.modelMapper = modelmapper;
     }
+
 
     @Override
     public void addItem(ItemServiceModel itemServiceModel) {
@@ -54,7 +57,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item findEntityById(Long itemId) {
         return itemRepository.findById(itemId)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(ObjectNotFoundException::new);
     }
 
 

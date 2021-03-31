@@ -10,11 +10,11 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class ItemViewModel {
-
+private Long id;
     private String name;
     private String description;
     private BigDecimal price;
-    private String imgUrl;
+    private String imageUrl;
     private String videoUrl;
     private Instant receivedOn;
     private CategoryEnum categoryEnum;
@@ -24,37 +24,49 @@ public class ItemViewModel {
     public ItemViewModel() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public ItemViewModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ItemViewModel setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public ItemViewModel setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public ItemViewModel setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public ItemViewModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
     }
 
     public String getVideoUrl() {

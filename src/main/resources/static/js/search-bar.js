@@ -17,7 +17,7 @@ searchBar.addEventListener('keyup', (e) => {
     const searchingCharacters = searchBar.value.toLowerCase();
     let filteredItems = allItems.filter(item => {
         return item.name.toLowerCase().includes(searchingCharacters)
-            || item.brand.name.toLowerCase().includes(searchingCharacters);
+            || item.brand.toLowerCase().includes(searchingCharacters);
     });
     displayItems(filteredItems);
 })
@@ -34,7 +34,7 @@ const displayItems = (items) => {
                 <div class="card-body">
                     <div class="text-center">
                         <p class="card-text border-bottom ">Name: ${i.name}</p>
-                        <p class="card-text border-bottom ">Brand: ${i.brand.name}</p>
+                        <p class="card-text border-bottom ">Brand: ${i.brand}</p>
                         <p class="card-text border-bottom ">Type: ${i.categoryEnum}</p>
                        
                     </div>

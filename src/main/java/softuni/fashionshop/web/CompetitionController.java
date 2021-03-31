@@ -35,11 +35,3 @@ public class CompetitionController {
 
 }
 
-// @PostMapping("/add")
-//    public String add(Model model,  @ModelAttribute("studentServiceModel")
-//        StudentServiceModel studentServiceModel) throws IOException {
-//
-//        this.studentService.addStudent(studentServiceModel);
-//        model.addAttribute("students", this.studentService.findAll());
-//        return "home";
-//    }
