@@ -1,9 +1,6 @@
 package softuni.fashionshop.service;
 
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +15,10 @@ import softuni.fashionshop.model.entity.Role;
 import softuni.fashionshop.model.entity.UserEntity;
 import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 //unit test JUnit5
 

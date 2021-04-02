@@ -4,8 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import softuni.fashionshop.model.entity.Role;
-import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.entity.UserEntity;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.repository.RoleRepository;
 import softuni.fashionshop.repository.UserRepository;
 

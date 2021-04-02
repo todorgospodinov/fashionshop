@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import softuni.fashionshop.model.service.CompetitionServiceModel;
 import softuni.fashionshop.service.CompetitionService;
 
-import javax.servlet.annotation.MultipartConfig;
 import java.io.IOException;
 
 @Controller
@@ -20,7 +19,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/cloud")
-    public String open(){
+    public String open() {
         return "competition";
     }
 
@@ -28,7 +27,7 @@ public class CompetitionController {
     public String add(Model model, @ModelAttribute("competitionServiceModel")
             CompetitionServiceModel competitionServiceModel) throws IOException {
         this.competitionService.addCompetition(competitionServiceModel);
-        model.addAttribute("competitions", this. competitionService.findAll());
+        model.addAttribute("competitions", this.competitionService.findAll());
 
         return "competition";
     }

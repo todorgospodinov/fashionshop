@@ -1,20 +1,20 @@
 package softuni.fashionshop.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import softuni.fashionshop.model.entity.Role;
-import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.entity.UserEntity;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.service.UserRegistrationServiceModel;
 import softuni.fashionshop.repository.RoleRepository;
 import softuni.fashionshop.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
