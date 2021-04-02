@@ -34,6 +34,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 // allow access to index, user login and registration to anyone "/cloud","/add"
                         antMatchers("/", "/users/login", "/users/register").permitAll().
                 // protect all other pages
+                        antMatchers("/articles/add").hasRole("ADMIN").
                         antMatchers("/**").authenticated().
                 and().
                 // configure login with HTML form

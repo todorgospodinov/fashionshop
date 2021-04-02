@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.fashionshop.model.binding.ItemAddBindingModel;
+import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.service.BrandService;
@@ -74,5 +75,25 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
 
         return "details";
     }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable Long id,
+                         Model model) {
+        itemService.delete(id);
+        return "redirect:/item/add";
+    }
+
+
+//    @DeleteMapping("/delete/{id}")
+//    public String delete(@PathVariable Long id,
+//                         Model model) {
+//
+//        offerService.delete(id);
+//
+//        return "redirect:/offers/all";
+//    }
+
+
+
 
 }

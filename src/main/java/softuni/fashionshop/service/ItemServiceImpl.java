@@ -11,6 +11,8 @@ import softuni.fashionshop.model.view.ItemViewModel;
 import softuni.fashionshop.repository.ItemRepository;
 import softuni.fashionshop.repository.UserRepository;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
@@ -61,6 +63,27 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
+    @Override
+    public void delete(long id) {
+        itemRepository.deleteById(id);
+    }
+
+
+
+
+
+
+
+
+//    @Override
+//    public Offer deleteOffer(Long id) {
+//        Offer old = offerRepo.findById(id).orElseThrow(() ->
+//                new EntityNotFoundException(String.format("Offer with ID=%s not found.", id)));
+//        offerRepo.deleteById(id);
+//        return old;
+//    }
+
+
 
 //    Item item = this.modelmapper.map(itemServiceModel, Item.class);
 //        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
@@ -104,10 +127,7 @@ public class ItemServiceImpl implements ItemService {
 //
 //
 //
-//    @Override
-//    public void delete(Long id) {
-//        this.itemRepository.deleteById(id);
-//    }
+
 //
 //    @Override
 //    public void buyById(Long id) {

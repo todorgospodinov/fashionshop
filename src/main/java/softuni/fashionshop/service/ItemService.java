@@ -13,6 +13,7 @@ public interface ItemService {
 
     Item findEntityById(Long itemId);
 
+    void delete(long id);
 
     //List<ItemViewModel> findAllItems ();
 
@@ -21,7 +22,6 @@ public interface ItemService {
 
     //List<ItemViewModel> findAllItemsByCategoryEnum(CategoryEnum categoryEnum);
 
-   // void delete(Long id);
 
 
   //  void buyById(Long id);

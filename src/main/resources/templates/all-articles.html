@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 450px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {height:auto;}
+        }
+    </style>
+</head>
+<body>
+
+<th:block th:include="~{fragments/nav}" >  </th:block>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+
+            <form
+                    th:action="@{/articles/add}"
+                    method="POST"
+                    th:object="${articleAddBindingModel}"
+                    class="text-light">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="title">Article title</label>
+                        <input
+                                th:field="*{title}"
+                                th:errorclass="is-invalid"
+                                id="title"
+                                name="title"
+                                type="text"
+                                class="form-control"
+                                placeholder="Title">
+                        <small id="titleError" class="invalid-feedback form-text bg-danger rounded">Title must be between 3 and 20
+                            characters</small>
+                    </div>
+                </div>
+                <div class="form-row ">
+                    <div class="col">
+                        <label for="imageUrl">Image Url</label>
+                        <input th:field="*{imageUrl}"
+                               th:errorclass="is-invalid"
+                               name="imageUrl"
+                               id="imageUrl" type="text" class="form-control" placeholder="Image Url">
+                        <small id="imageUrlError" class="invalid-feedback form-text bg-danger rounded">Image url must be more than 5
+                            characters</small>
+                    </div>
+                </div>
+                <div class="form-row m-5">
+                    <div class="col">
+                        <label for="genre">Genre</label>
+                        <select
+                                th:field="*{styleEnum}"
+                                th:errorclass="is-invalid"
+                                id="genre"
+                                name="genre" class="custom-select">
+                            <option value="" selected>Select genre</option>
+                            <option
+                                    th:each="s : ${T(softuni.fashionshop.model.entity.enums.StyleEnum).values()}"
+                                    th:value="${s}"
+                                    th:selected="${s} == *{styleEnum}"
+                                    th:text="${s}">Select genre</option>
+                        </select>
+                        <small id="genreError" class="invalid-feedback form-text bg-danger rounded">You must select genre</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label for="content">Text content</label>
+                        <textarea
+                                th:field="*{content}"
+                                th:errorclass="is-invalid"
+                                id="content"
+                                name="content"
+                                type="text"
+                                class="form-control"
+                                placeholder="Text content"></textarea>
+                        <small id="contentError" class="invalid-feedback form-text bg-danger rounded">Text content length must be more than 5 characters</small>
+                    </div>
+
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Add New Article</button>
+                </div>
+            </form>
+
+
+<!--&lt;!&ndash;            <main class="p-5 align-content-center bg-blur">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div id="all-articles-jumbotron" class="jumbotron p-3 p-md-5 text-white rounded">&ndash;&gt;-->
+<!--                        <div class="col-md-6 px-0">-->
+<!--                            <h1 class="display-4 font-italic font-weight-bold">Title of the pinned article</h1>-->
+<!--                            <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>-->
+<!--                        </div>-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+
+<!--                    <div class="row mb-2">-->
+<!--                        <div class="col-md-6">-->
+<!--                            <div class="card flex-md-row mb-4 shadow-sm h-md-250">-->
+<!--                                <div class="card-body d-flex flex-column align-items-start">-->
+<!--                                    <strong class="d-inline-block mb-2 text-primary">Genre</strong>-->
+<!--                                    <h3 class="mb-0">Title</h3>-->
+<!--                                    <div class="mb-1 text-muted"> Date and time in format dd-MM-yyyy HH:mm</div>-->
+<!--                                    <p class="card-text mb-auto">First 60 characters from content + ...</p>-->
+<!--                                    <a href="/">Continue reading</a>-->
+<!--                                </div>-->
+<!--                                <img class="card-img-right flex-auto d-none d-lg-block"-->
+<!--                                     src="/" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            </main>&ndash;&gt;-->
+        </div>
+
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p>ADS</p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{fragments/footer}" >  </th:block>
+
+</body>
+</html>
