@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity extends BaseEntity {
     private String username;
     private String email;
@@ -17,7 +17,8 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity() {
     }
-    @Column(name="username", nullable = false)
+
+    @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;
     }
@@ -26,7 +27,8 @@ public class UserEntity extends BaseEntity {
         this.username = username;
         return this;
     }
-    @Column(name="email")
+
+    @Column(name = "email")
     @Email
     public String getEmail() {
         return email;
@@ -36,7 +38,8 @@ public class UserEntity extends BaseEntity {
         this.email = email;
         return this;
     }
-    @Column(name="password", nullable = false)
+
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -46,7 +49,7 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    @Column(name="fullName")
+    @Column(name = "fullName")
     public String getFullName() {
         return fullName;
     }
@@ -56,7 +59,7 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    @ManyToMany(fetch= FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Role> getRoles() {
         return roles;
     }

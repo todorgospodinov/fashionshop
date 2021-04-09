@@ -1,9 +1,12 @@
 package softuni.fashionshop.service;
 
 import softuni.fashionshop.model.entity.UserEntity;
+import softuni.fashionshop.model.entity.enums.RoleEnum;
 import softuni.fashionshop.model.service.UserRegistrationServiceModel;
 
-    public interface UserService {
+import java.util.List;
+
+public interface UserService {
 
         void seedUsers();
 
@@ -13,5 +16,8 @@ import softuni.fashionshop.model.service.UserRegistrationServiceModel;
 
         UserEntity findByName(String username);
 
-    }
+        List<String> findAllUsernames();
+
+    void changeRole(String username, RoleEnum roleEnum);
+}
 

@@ -13,15 +13,13 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" th:href="@{/stats}">Site stats</a>
+                        <a class="dropdown-item" th:href="@{/roles/add}" >Add role</a>
                         <a class="dropdown-item" th:href="@{/items/add}" >Add item</a>
                         <a class="dropdown-item" th:href="@{/statistics}">Items stats</a>
-                        <a class="dropdown-item" th:href="@{articles/add}">Add article</a>
+                        <a class="dropdown-item" th:href="@{/articles/add}">Add article</a>
                     </div>
 
                 </div>
-
-
-
 
             </div>
 
@@ -42,7 +40,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li sec:authorize="isAuthenticated()"> <a th:href="@{articles/all/}"><span class="glyphicon glyphicon-article"></span> All Article</a></li>
+                    <li sec:authorize="isAuthenticated()"> <a th:href="@{/articles/all/}"><span class="glyphicon glyphicon-article"></span> All Article</a></li>
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 <!--                    <li sec:authorize="isAuthenticated()"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a></li>-->

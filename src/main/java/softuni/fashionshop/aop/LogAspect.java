@@ -23,9 +23,9 @@ public class LogAspect {
     public void afterAdvice(JoinPoint joinPoint){
 
         Object[] args = joinPoint.getArgs();
-        Long albumId = (Long) args[0];
+        Long itemId = (Long) args[0];
         String action = joinPoint.getSignature().getName();
 
-        logService.createLog(action, albumId);
+        logService.createLog(action, itemId);
     }
 }

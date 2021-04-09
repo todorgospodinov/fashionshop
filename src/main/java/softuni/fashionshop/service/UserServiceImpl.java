@@ -1,6 +1,7 @@
 package softuni.fashionshop.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import softuni.fashionshop.repository.RoleRepository;
 import softuni.fashionshop.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-      @Override
+    @Override
     public void seedUsers() {
 
         if (userRepository.count() == 0) {
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
         UserEntity newUser = modelMapper.map(serviceModel, UserEntity.class);
         newUser.setPassword(passwordEncoder.encode(serviceModel.getPassword()));
 
-        Role role =  roleRepository.
+        Role role = roleRepository.
                 findByRole(RoleEnum.USER).orElseThrow(
                 () -> new IllegalStateException("USER role not found. Please seed the roles."));
 
@@ -94,4 +96,43 @@ public class UserServiceImpl implements UserService {
                 .findByUsername(username)
                 .orElseThrow(IllegalArgumentException::new);
     }
+
+    @Override
+    public List<String> findAllUsernames() {
+        return userRepository.findAllUsernames();
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Override
+    public void changeRole(String username, RoleEnum roleEnum) {
+        UserEntity userEntity = userRepository
+                .findByUsername(username).orElse(null);
+        Role role = roleRepository.
+                findByRole(roleEnum).orElseThrow(
+                () -> new IllegalStateException("USER role not found. Please seed the roles."));
+
+        Role newRole = new Role();
+        newRole.setRole(roleEnum);
+
+        if (!userEntity.getRoles().contains(newRole)) {
+            userEntity.addRole(role);
+            userRepository.save(userEntity);
+        }
+    }
+
 }
+
+
+//@Override
+//    public void changeRole(String username, RoleEnum roleEnum) {
+//       UserEntity userEntity= userRepository
+//               .findByUsername(username).orElse(null);
+//
+//       if(userEntity.getRole().getName() !=roleEnum){
+//           userEntity.setRole(roleService.findRole(roleEnum));          }
+//userRepository.save(userEntity);
+//
+//       }
+//
+
+
