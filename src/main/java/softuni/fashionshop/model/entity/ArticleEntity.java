@@ -9,6 +9,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 
 @Entity
@@ -57,6 +59,8 @@ public class ArticleEntity extends BaseEntity {
     }
 
     @Column(nullable = false)
+    @NotNull
+    @Size(min=3,max=512)
     public String getContent() {
         return content;
     }

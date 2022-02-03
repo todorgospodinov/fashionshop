@@ -54,7 +54,7 @@ public class ArticleServiceImplTest {
         testArticleEntity2.setContent("content 2");
         testArticleEntity2.setUserEntity(testUser2);
 
-        serviceToTest = new ArticleServiceImpl(mockArticleRepository,mockUserRepository,new ModelMapper());
+        serviceToTest = new ArticleServiceImpl(mockArticleRepository, mockUserRepository,new ModelMapper());
 
     }
 

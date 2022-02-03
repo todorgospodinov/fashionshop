@@ -4,6 +4,8 @@ import softuni.fashionshop.model.entity.enums.StyleEnum;
 
 public class ArticleServiceModel {
 
+
+    private Long id;
     private String title;
     private String imageUrl;
     private StyleEnum styleEnum;
@@ -13,7 +15,14 @@ public class ArticleServiceModel {
     public ArticleServiceModel() {
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public ArticleServiceModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
     public String getTitle() {
         return title;
     }

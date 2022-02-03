@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
+        /*<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />*/
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;
@@ -16,7 +17,7 @@
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 450px}
+        .row.content {height: 500px}
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -43,9 +44,9 @@
     </style>
 </head>
 <body>
-
+<nav>
 <th:block th:include="~{fragments/nav}" >  </th:block>
-
+    </nav>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -54,35 +55,56 @@
             <p><a href="#">Link</a></p>
         </div>
 
-        <div class="col-sm-8 text-left">
+        <div    class="col-sm-8 text-left">
 
 
             <div
                     th:if="${latestArticle}"
-                    id="all-articles-jumbotron" class="jumbotron p-3 p-md-5 text-white rounded">
-                <div class="col-md-6 px-0">
+                    id="all-articles-jumbotron" class="jumbotron jumbotron-fluid">
+                <div  class="container-fluid">
                     <h1
                             class="display-4 font-italic font-weight-bold"
                             th:text="${latestArticle.title}">Title of the pinned article</h1>
-                    <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+
+                    <p class="lead mb-0"><a th:href="@{/articles/details/(id=*{latestArticle.id})}" class="text-white font-weight-bold">Continue reading...</a></p>
                 </div>
             </div>
 
-            <div th:object="${articleAddBindingModel}"  class="row mb-2">
-                <div   class="col-md-6">
+            <div class="row mb-2">
+                <div  th:each="article, articleStat:${articles}" th:object="${article}" class="col-md-6">
                     <div  class="card flex-md-row mb-4 shadow-sm h-md-250">
                         <div  class="card-body d-flex flex-column align-items-start">
-                            <strong th:text="*{styleEnum}" class="d-inline-block mb-2 text-primary">Genre</strong>
-                            <h3 th:text="${articleAddBindingModel.title}" class="mb-0">Title</h3>
-<!--                            <div   class="mb-1 text-muted"> Date and time in format dd-MM-yyyy HH:mm</div>-->
+                            <strong th:text="${article.getStyleEnum()}" class="d-inline-block mb-2 text-primary">Genre</strong>
+                            <h3 th:text="${article.getTitle()}" class="mb-0">Title</h3>
+                            <div th:text="${article.getCreatedOn()}"  class="mb-1 text-muted"> Date and time in format dd-MM-yyyy HH:mm</div>
                             <p th:text="${articleAddBindingModel.content}" class="card-text mb-auto">First 60 characters from content + ...</p>
-                            <a href="#">Continue reading</a>
+<!--                            link kogato izpolzvame article view model 2.33 exprep-->
+    <a th:href="@{/articles/details/(id=*{id})}">Continue reading</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-lg-block"
-                             src="#" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;">
+                             th:src="${article.getImageUrl()}" alt="Thumbnail [300x250]" style="width: 300px; height: 250px;">
                     </div>
                 </div>
             </div>
+
+
+<!--            <div class="container">-->
+<!--                <h2 class="text-center text-white mt-5">Auto Dealer Shop Offers</h2>-->
+<!--                <hr style="width: 50%"/>-->
+<!--                <div class='row mb-4 d-flex justify-content-around'>-->
+
+<!--                    <div th:each="article, articleStat: ${articles}" class="col-md-4 d-flex flex-column bg-text mb-3">-->
+<!--                        <h2>Car brand: <span th:text="${article.getTitle()}" /></h2>-->
+<!--                        <h4>Model: <span th:text="${article.getStyleEnum()}" /></h4>-->
+<!--                        <h4>Year: <span th:text="${article.getCreatedOn()}" /></h4>-->
+<!--                        <h4>Engine: <span th:text="${article.getContent()}" /></h4>-->
+<!--                        <h4><a class="btn-block" href="/cars/id">Details</a></h4>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+
+
         </div>
 
 
@@ -101,8 +123,8 @@
     </div>
 
 </div>
-</div>
+<footer>
 <th:block th:include="~{fragments/footer}" >  </th:block>
-
+    </footer>
 </body>
 </html>

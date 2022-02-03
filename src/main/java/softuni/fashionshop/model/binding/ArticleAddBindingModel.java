@@ -4,16 +4,30 @@ import softuni.fashionshop.model.entity.enums.StyleEnum;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.Instant;
 
 public class ArticleAddBindingModel {
     private String title;
     private String imageUrl;
     private StyleEnum styleEnum;
     private String content;
+    private Instant createdOn;
+
+
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
+
+    public ArticleAddBindingModel setCreatedOn(Instant createdOn) {
+        this.createdOn = createdOn;
+        return this;
+    }
+
 
 
     public ArticleAddBindingModel() {
     }
+    @NotNull
     @Size(min = 2, message = "Title length must be more than two characters")
     public String getTitle() {
         return title;
@@ -41,6 +55,7 @@ public class ArticleAddBindingModel {
         this.styleEnum = styleEnum;
         return this;
     }
+    @NotNull
     @Size(min = 3, message = "Content length must be more than three characters")
     public String getContent() {
         return content;

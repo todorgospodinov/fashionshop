@@ -1,15 +1,14 @@
 package softuni.fashionshop.web;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import softuni.fashionshop.model.binding.ArticleAddBindingModel;
 import softuni.fashionshop.model.service.ArticleServiceModel;
@@ -24,23 +23,36 @@ import java.util.Optional;
 public class ArticleController {
     private final ArticleService articleService;
     private final ModelMapper modelMapper;
-
+@Autowired
     public ArticleController(ArticleService articleService, ModelMapper modelMapper) {
         this.articleService = articleService;
         this.modelMapper = modelMapper;
     }
 
+//
+//    @GetMapping("/all")
+//    public String getAllArticles( Model model) {
+//
+//        Optional<ArticleViewModel> articleOpt = articleService.findLatestArticle();
+//        if (articleOpt.isPresent()) {
+//            model.addAttribute("latestArticle", articleOpt.get());
+//        }
+//        return "all-articles";
+//    }
 
-    @GetMapping("/all")
-    public String getAllArticles( Model model) {
 
-        Optional<ArticleViewModel> articleOpt = articleService.findLatestArticle();
+        @GetMapping("/all")
+        public String getArticles(Model articles) {
+            Optional<ArticleViewModel> articleOpt = articleService.findLatestArticle();
         if (articleOpt.isPresent()) {
-            model.addAttribute("latestArticle", articleOpt.get());
+            articles.addAttribute("latestArticle", articleOpt.get());
         }
 
-        return "all-articles";
-    }
+            articles.addAttribute("articles", articleService.getArticles()); // set model data
+            return "all-articles";
+        }
+
+
 
     @GetMapping("/add")
     public String addArticle() {
@@ -48,13 +60,12 @@ public class ArticleController {
     }
 
     @ModelAttribute("articleAddBindingModel")
-    public ArticleAddBindingModel createAddBindingModel() {
+    public ArticleAddBindingModel createBindingModel() {
         return new ArticleAddBindingModel();
     }
 
-
     @PostMapping("/add")
-    public String addConfirm(@Valid ArticleAddBindingModel articleAddBindingModel,
+    public String addArticle(@Valid ArticleAddBindingModel articleAddBindingModel,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              @AuthenticationPrincipal UserDetails principal) {
@@ -73,5 +84,14 @@ public class ArticleController {
         articleService.addArticle(articleServiceModel);
         return "redirect:/articles/all";
     }
+
+
+    @GetMapping("/details")
+    public ModelAndView getArticleDetails(@RequestParam("id") Long id, ModelAndView modelAndView) {
+       modelAndView.addObject("article", this.articleService.findById(id));
+       modelAndView.setViewName("details-article");
+        return modelAndView;
+    }
+
 
 }

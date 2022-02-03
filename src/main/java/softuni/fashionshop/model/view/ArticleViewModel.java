@@ -5,11 +5,24 @@ import softuni.fashionshop.model.entity.enums.StyleEnum;
 
 public class ArticleViewModel {
 
+
+    private Long id;
     private String title;
     private String imageUrl;
     private StyleEnum styleEnum;
     private String content;
     private String author;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public ArticleViewModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
 
     public String getTitle() {
         return title;
