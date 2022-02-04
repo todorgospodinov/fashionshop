@@ -24,4 +24,5 @@ public interface ArticleService {
 
     Optional<ArticleViewModel> findLatestArticle();
 
+    void delete(Long id);
 }

@@ -24,7 +24,7 @@
 
 <div role="main" class="container text-light">
     <div class="row">
-        <div class="col-md-8 blog-main">
+        <div  th:object="${article}" class="col-md-8 blog-main">
             <h3 class="pb-3 mb-4 font-italic border-bottom">
                 New Story
             </h3>
@@ -34,6 +34,12 @@
                 <p class="blog-post-meta">AddedOn by Author name</p>
 
                 <p>Content ... </p>
+                <div  class="btn-group">
+<!--                    <a href="/items/update/${id}"  type="button" class="btn btn-sm btn-outline-secondary">Update</a>-->
+                </div>
+                <div  class="btn-group">
+                    <a th:href="@{/articles/delete/{id}(id=*{id})}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                </div>
             </div><!-- /.blog-post -->
 
         </div><!-- /.blog-main -->

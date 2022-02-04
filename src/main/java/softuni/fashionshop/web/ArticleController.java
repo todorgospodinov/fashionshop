@@ -93,5 +93,10 @@ public class ArticleController {
         return modelAndView;
     }
 
+@GetMapping("/delete/{id}")
+public String delete (@PathVariable("id") Long id){
+this.articleService.delete(id);
+return "redirect:/articles/all";
+}
 
 }

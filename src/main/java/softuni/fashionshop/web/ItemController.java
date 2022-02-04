@@ -83,7 +83,7 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
 
 
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/delete/")
     public String delete(@PathVariable ("id") Long id) {
         this.itemService.delete(id);
 

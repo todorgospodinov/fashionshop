@@ -110,4 +110,9 @@ public class ArticleServiceImpl implements ArticleService {
                     return avm;
                 });
     }
+
+    @Override
+    public void delete(Long id) {
+this.articleRepository.deleteById(id);
+    }
 }

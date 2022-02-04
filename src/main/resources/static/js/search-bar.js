@@ -44,7 +44,7 @@ const displayItems = (items) => {
                         </div>
                        <th:block>
                         <div  class="btn-group">
-                            <a href="/items/delete/${i.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                            <a href="/items/delete/${i.id}}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
                         </div>
                         </th:block>
                     </div>
