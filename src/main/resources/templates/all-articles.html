@@ -76,7 +76,7 @@
                         <div  class="card-body d-flex flex-column align-items-start">
                             <strong th:text="${article.getStyleEnum()}" class="d-inline-block mb-2 text-primary">Genre</strong>
                             <h3 th:text="${article.getTitle()}" class="mb-0">Title</h3>
-                            <div th:text="${article.getCreatedOn()}"  class="mb-1 text-muted"> Date and time in format dd-MM-yyyy HH:mm</div>
+                            <div th:text="${#dates.format(article.getCreatedOn(),'dd-MMM-yyyy HH:mm')}"  class="mb-1 text-muted"> Date and time in format dd-MM-yyyy HH:mm</div>
                             <p th:text="${articleAddBindingModel.content}" class="card-text mb-auto">First 60 characters from content + ...</p>
 <!--                            link kogato izpolzvame article view model 2.33 exprep-->
     <a th:href="@{/articles/details/(id=*{id})}">Continue reading</a>

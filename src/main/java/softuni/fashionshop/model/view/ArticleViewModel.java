@@ -3,6 +3,8 @@ package softuni.fashionshop.model.view;
 
 import softuni.fashionshop.model.entity.enums.StyleEnum;
 
+import java.time.Instant;
+
 public class ArticleViewModel {
 
 
@@ -12,7 +14,10 @@ public class ArticleViewModel {
     private StyleEnum styleEnum;
     private String content;
     private String author;
+    private Instant createdOn;
 
+    public ArticleViewModel() {
+            }
 
     public Long getId() {
         return id;
@@ -66,6 +71,15 @@ public class ArticleViewModel {
 
     public ArticleViewModel setAuthor(String author) {
         this.author = author;
+        return this;
+    }
+
+    public Instant getCreatedOn() {
+        return createdOn;
+    }
+
+    public ArticleViewModel setCreatedOn(Instant createdOn) {
+        this.createdOn = createdOn;
         return this;
     }
 }

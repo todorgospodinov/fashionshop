@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <title>Fashion Forum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 450px
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+        input:valid {
+            border:lawngreen solid 2px;
+        }
+        input:invalid{
+            border: red solid 2px;
+        }
+        input:invalid:required{
+            background-image: linear-gradient(to right, lightpink,seashell);
+        }
+
+
+    </style>
+</head>
+<body>
+
+<th:block th:include="~{fragments/nav}" >  </th:block>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+            <h1>Update product</h1>
+
+            <hr>
+            <form th:object="${itemAddBindingModel}" th:action="@{/items/update}" method="POST">
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputName" class="col-form-label text-light">Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{name}" th:errorclass="is-invalid"
+                               required minlength="2" maxlength="30"
+                               name="name" type="text" id="inputName"
+                               class="form-control"
+                               aria-describedby="nameHelpInline">
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id="nameError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">Name length must be more than 3 characters</small>
+
+                        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id="usernameUniqueError"
+                               class="text-light form-text bg-danger rounded">Name is already exist</small>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputDescription" class="col-form-label text-light">Description</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{description}"
+                               th:errorclass="is-invalid"
+                               required minlength="2" maxlength="500"
+                               type="text" name="description"
+                               id="inputDescription" class="form-control form-control-sm"
+                               aria-describedby="descriptionHelpInline">
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" id="descriptionError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Full name length must be more than 3 characters</small>
+                    </div>
+                </div>
+
+
+                 <div>
+                    <div class="col-auto">
+                        <label for="inputCategoryEnum" class="col-form-label text-light">Category</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="browser-default custom-select" id="inputCategoryEnum"
+                                th:errorclass="is-invalid"
+                                required
+                                name="categoryEnum">
+                            <option value="">Select category</option>
+                            //pravim si masiv ot categoryname
+                            <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.CategoryEnum).values()}"
+                                     th:text="${o}"  th:value="${o}">Shirt</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('categoryEnum')}" th:errors="*{categoryEnum}"
+
+                               id="categoryEnumError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">You have to choose category </small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="brand" class="col-form-label text-light">Brand</label>
+                    </div>
+                    <select th:field="*{brand}" id="brand"
+                            name="brand"
+                            th:errorclass="is-invalid"
+                            required
+                            class="form-control">
+                        <option value="">- Select brand -</option>
+                        <option
+                                th:each="b: ${brands}"
+                                th:value="${b}"
+                                th:text="${b}" >
+                        </option>
+                    </select>
+
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" id="brandError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Brand length must be more than 2 characters</small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputReceivedOn" class="col-form-label text-light">Received Date</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:errorclass="is-invalid"
+                               required
+                               type="date" name="receivedOn" id="inputReceivedOn"
+                               class="form-control"
+                               aria-describedby="receivedOnHelpInline">
+                    </div>
+                 <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('receivedOn')}" th:errors="*{receivedOn}" id="receivedOnError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Password length must be between 5 and 20 characters and passwords should match.
+                        </small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputImageUrl" class="col-form-label text-light">ImageUrl</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{imageUrl}" th:errorclass="is-invalid"
+                               required
+                               type="text" name="imageUrl"
+                               id="inputImageUrl" class="form-control"
+                               aria-describedby="imageHelpInline">
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" id="imageError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Image URL must be valid.
+                        </small>
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <div class="col-auto">
+                        <label for="videoUrl" class="col-form-label text-light">VideoUrl</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{videoUrl}" th:errorclass="is-invalid"
+                               required
+                               type="text" name="videoUrl"
+                               id="videoUrl" class="form-control"
+                               aria-describedby="videoHelpInline">
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('videoUrl')}" th:errors="*{videoUrl}" id="videoError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Video URL must be valid.
+                        </small>
+                    </div>
+                </div>
+
+
+
+
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputPrice" class="col-form-label text-light">Price</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{price}" th:errorclass="is-invalid"
+                               required min="0"
+                               type="number" name="price"
+                               id="inputPrice" class="form-control"
+                               aria-describedby="priceHelpInline">
+                    </div>
+                    <div class="col-auto">
+                        <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" id="priceError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Price must be positive number.
+                        </small>
+                    </div>
+                </div>
+
+
+
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Update product</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p>ADS</p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{fragments/footer}" >  </th:block>
+
+</body>
+</html>
+

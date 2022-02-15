@@ -71,7 +71,10 @@
                 </dd>
             </dl>
             <div  class="btn-group">
-                <a href="/items/update/${id}"  type="button" class="btn btn-sm btn-outline-secondary">Update</a>
+                <a th:href="@{/items/update/{id}(id=*{id})}"  type="button" class="btn btn-sm btn-outline-secondary">Update</a>
+            </div>
+            <div  class="btn-group">
+                <a th:href="@{/items/delete/{id}(id=*{id})}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
             </div>
         </div>
         <div class="col-md-6 bg-transparent rounded">

@@ -12,6 +12,7 @@ import softuni.fashionshop.repository.ItemRepository;
 import softuni.fashionshop.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collection;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -68,11 +69,10 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.deleteById(id);
     }
 
-
-
-
-
-
+    @Override
+    public Collection<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
 
 
 //    @Override

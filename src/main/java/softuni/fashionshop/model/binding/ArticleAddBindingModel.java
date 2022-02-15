@@ -7,12 +7,25 @@ import javax.validation.constraints.Size;
 import java.time.Instant;
 
 public class ArticleAddBindingModel {
+
+
+
+    private Long id;
     private String title;
     private String imageUrl;
     private StyleEnum styleEnum;
     private String content;
     private Instant createdOn;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public ArticleAddBindingModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public Instant getCreatedOn() {
         return createdOn;

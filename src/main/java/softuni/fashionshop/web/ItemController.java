@@ -30,6 +30,7 @@ public class ItemController {
         this.modelMapper = modelMapper;
     }
 
+
     @ModelAttribute("itemAddBindingModel")
     public ItemAddBindingModel createAddBindingModel() {
         return new ItemAddBindingModel();
@@ -65,6 +66,13 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
         return "redirect:/home";
     }
 
+    @GetMapping("/all")
+    public String getAllItems(Model items){
+        items.addAttribute("items", itemService.getAllItems()); // set model data
+         return "all-items";
+    }
+
+
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id, Model model){
 
@@ -76,22 +84,26 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
     }
 
 
-    @PostMapping("/update/{id}")
+    @GetMapping("/update/{id}")
     public String updateItem (@PathVariable Long id){
-      return "all-items";
+      return "update-item";
     }
 
 
 
-    @GetMapping("/delete/")
-    public String delete(@PathVariable ("id") Long id) {
-        this.itemService.delete(id);
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        itemService.delete(id);
 
         return "redirect:/home";
     }
 
 
-
+//@GetMapping("/delete/{id}")
+//public String delete (@PathVariable("id") Long id){
+//this.articleService.delete(id);
+//return "redirect:/articles/all";
+//}
 
 //    @DeleteMapping("/delete/{id}")
 //    public String delete(@PathVariable Long id,

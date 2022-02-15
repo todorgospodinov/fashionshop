@@ -4,6 +4,9 @@ import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.service.ItemServiceModel;
 import softuni.fashionshop.model.view.ItemViewModel;
 
+import java.util.Collection;
+import java.util.List;
+
 
 public interface ItemService {
 
@@ -14,6 +17,9 @@ public interface ItemService {
     Item findEntityById(Long itemId);
 
     void delete(Long id);
+
+    Collection<Item> getAllItems();
+
 
     //List<ItemViewModel> findAllItems ();
 

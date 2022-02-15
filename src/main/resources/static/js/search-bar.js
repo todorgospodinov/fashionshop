@@ -42,11 +42,10 @@ const displayItems = (items) => {
                         <div class="btn-group">
                             <a href="/items/details/${i.id}"  type="button" class="btn btn-sm btn-outline-secondary">Details</a>
                         </div>
-                       <th:block>
-                        <div  class="btn-group">
-                            <a href="/items/delete/${i.id}}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
-                        </div>
-                        </th:block>
+                           <div  class="btn-group">
+                            <a href="/items/delete/${i.id}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                          </div>
+                      
                     </div>
                 </div>
             </div>

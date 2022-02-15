@@ -5,9 +5,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
+import softuni.fashionshop.exceptions.ArticleNotFoundException;
 import softuni.fashionshop.model.entity.ArticleEntity;
 import softuni.fashionshop.model.entity.UserEntity;
+import softuni.fashionshop.model.entity.enums.StyleEnum;
 import softuni.fashionshop.model.service.ArticleServiceModel;
 import softuni.fashionshop.model.view.ArticleViewModel;
 import softuni.fashionshop.model.view.ItemViewModel;
@@ -63,25 +68,58 @@ public class ArticleServiceImpl implements ArticleService {
 
     }
 
-    @Override
-    public ArticleEntity getArticleById(Long id) {
-        return null;
-    }
+//    @Override
+//    public ArticleEntity getArticleById(Long id) throws ArticleNotFoundException {
+//
+//        Optional<ArticleEntity> result= articleRepository.findById(id);
+//        if(result.isPresent()){
+//            return result.get();
+//        }
+//        throw new ArticleNotFoundException("Not find any article with id " + id);
+//
+//    }
+//
+//    @Override
+//    public ArticleEntity createOffer(ArticleEntity article) {
+//        return null;
+//    }
 
-    @Override
-    public ArticleEntity createOffer(ArticleEntity article) {
-        return null;
-    }
+//    @Override
+//    public ArticleEntity updateArticle(ArticleEntity articleEntity, Long id) {
+//
+//ArticleEntity existingArticle = articleRepository.findById(id).orElseThrow();
+//
+//existingArticle.setTitle(articleEntity.getTitle());
+//        existingArticle.setImageUrl(articleEntity.getImageUrl());
+//       // existingArticle.setStyleEnum(StyleEnum.valueOf());
+//             existingArticle.setContent(articleEntity.getContent());
+//articleRepository.save(existingArticle);
+//        return existingArticle;
+//    }
 
-    @Override
-    public ArticleEntity updateArticle(ArticleEntity article) {
-        return null;
-    }
+//    @Override
+//    public String updateArticle(ArticleEntity articleEntity) {
+//        boolean foundResource=false;
+//        for(ArticleEntity current: articleRepository.findAll() ){
+//            if(current.getId()==articleEntity.getId()) {
+//                foundResource=true;
+//                current.setTitle(articleEntity.getTitle());
+//                current.setImageUrl(articleEntity.getImageUrl());
+//                current.setContent(articleEntity.getContent());
+//            }
+//        }
+//if( !foundResource){
+//    articleRepository.save(articleEntity);
+//    return "Success";
+//}
+//
+//     return "Success";
+//    }
 
-    @Override
-    public ArticleEntity deleteArticle(Long id) {
-        return null;
-    }
+//    @Override
+//    public ArticleEntity deleteArticle(Long id) {
+//        return null;
+//    }
 
 
 
@@ -110,6 +148,27 @@ public class ArticleServiceImpl implements ArticleService {
                     return avm;
                 });
     }
+
+//    @Override
+//    public ArticleServiceModel edit(ArticleServiceModel articleServiceModel, Long id) {
+//        ArticleEntity articleFromObj=this.articleRepository
+//                .findById(articleServiceModel.getId()).orElseThrow();
+//
+//        ArticleEntity updateArticle = this.articleRepository.saveAndFlush(articleFromObj);
+//        return this.modelMapper.map(updateArticle,ArticleServiceModel.class);
+//    }
+//
+//    @Override
+//    public void updateArticle(ArticleViewModel articleViewModel, Long id) {
+//        ArticleEntity articleEntity = this.modelMapper.map(articleViewModel, ArticleEntity.class);
+//        this.articleRepository.saveAndFlush(articleEntity);
+//    }
+
+    @Override
+    public Optional<ArticleEntity> updateArticleById(Long id) {
+        return articleRepository.findById(id);
+    }
+
 
     @Override
     public void delete(Long id) {

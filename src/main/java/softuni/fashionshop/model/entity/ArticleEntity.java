@@ -1,6 +1,7 @@
 package softuni.fashionshop.model.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import softuni.fashionshop.model.entity.enums.StyleEnum;
 
 import javax.persistence.Column;
@@ -70,6 +71,7 @@ public class ArticleEntity extends BaseEntity {
         return this;
     }
     @Column(nullable = false)
+    @DateTimeFormat(pattern="dd-MMM-YYYY")
     public Instant getCreatedOn() {
         return createdOn;
     }

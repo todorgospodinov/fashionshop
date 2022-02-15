@@ -3,7 +3,7 @@
         <nav class="navbar navbar-inverse">
         <div class="container-fluid">
 
-            <a class="navbar-brand" th:href="@{/}">FASHION</a>
+            <a class="navbar-brand" th:href="@{/home}">FASHION</a>
 
                             <div class="collapse navbar-collapse" id="myNavbar">
 
@@ -13,7 +13,7 @@
 
 
                                     <li class="nav-item" ><a th:href="@{/about}">About us</a></li>
-                                    <li sec:authorize="isAuthenticated()" class="nav-item"> <a th:href="@{/home}">Products</a></li>
+                                    <li sec:authorize="isAuthenticated()" class="nav-item"> <a th:href="@{/items/all}">Products</a></li>
                                     <li class="nav-item"><a th:href="@{/stores}">Stores</a></li>
                                     <li sec:authorize="isAuthenticated()" class="nav-item"><a th:href="@{/cloud}">Competition</a></li>
 
@@ -41,7 +41,7 @@
 
 
                                 <ul class="nav navbar-nav navbar-right">
-
+                                    <li sec:authorize="isAuthenticated()"> Hello, <span th:text="${#request.userPrincipal.getName()}"></span></li>>
                                     <li sec:authorize="isAuthenticated()"> <a th:href="@{/articles/all/}"><span class="glyphicon glyphicon-article"></span> All Article</a></li>
                                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/register}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                                     <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

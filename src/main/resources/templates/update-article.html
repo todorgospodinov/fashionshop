@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:include="~{fragments/head}" >  </th:block>
+
+<body>
+
+<th:block th:include="~{fragments/nav}" >  </th:block>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+        </div>
+        <div class="col-sm-8 text-left">
+
+<!--            <main class="p-5 bg-blur text-center">-->
+                <h1 class="text-light border-bottom">Update Article</h1>
+<!--                <div class="d-flex justify-content-center">-->
+                    <form th:object="${articleAddBindingModel}"
+                            th:action="@{/articles/update/{id}(id=*{id})}" method="POST"
+
+                          class="text-light">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="title">Article title</label>
+                                <input th:field="*{title}"
+                                       id="title"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Title">
+
+                            </div>
+                        </div>
+                        <div class="form-row ">
+                            <div class="col">
+                                <label for="imageUrl">Image Url</label>
+                                <input th:field="*{imageUrl}"
+                                       th:errorclass="is-invalid"
+                                       id="imageUrl" type="text" class="form-control" placeholder="Image Url">
+                            </div>
+                        </div>
+                        <div class="form-row m-5">
+                            <div class="col">
+                                <label for="styleEnum">Style</label>
+                                <select
+                                        th:field="*{styleEnum}"
+                                        th:errorclass="is-invalid"
+                                        id="styleEnum" class="custom-select">
+                                    <option value="">- Select style -</option>
+                                    <option th:each="s : ${T(softuni.fashionshop.model.entity.enums.StyleEnum).values()}"
+                                            th:text="${s}"
+                                            th:selected="${s} == *{styleEnum}"
+                                            th:value="${s}">Style</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="content">Text content</label>
+                                <textarea th:field="*{content}"
+                                          th:errorclass="is-invalid"
+                                          id="content" type="text" class="form-control" placeholder="Text content"></textarea>
+                                </div>
+                        </div>
+<!--                        <div class="form-row">-->
+<!--                            <div class="col">-->
+<!--                                <label for="author">Article author</label>-->
+<!--                                <input th:field="*{author}" id="author" type="text" class="form-control" placeholder="Author">-->
+<!--                                <small id="authorError" class="form-text bg-danger rounded">Author must be between 3 and 20-->
+<!--                                    characters</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button class="btn btn-primary btn-block w-50" type="submit">Update Article
+                            </button>
+                        </div>
+                    </form>
+<!--                </div>-->
+<!--            </main>-->
+        </div>
+
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p>ADS</p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="~{fragments/footer}" >  </th:block>
+
+</body>
+</html>

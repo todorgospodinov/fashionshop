@@ -1,9 +1,6 @@
 package softuni.fashionshop.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,7 +27,7 @@ public class LogEntity extends BaseEntity{
         this.userEntity = userEntity;
         return this;
     }
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     public Item getItem() {
         return item;
     }
