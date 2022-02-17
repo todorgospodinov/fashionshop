@@ -11,5 +11,7 @@ public interface CompetitionService {
     void addCompetition(CompetitionServiceModel competitionServiceModel) throws IOException;
 
     List<CompetitionViewModel> findAll();
+
+    void delete(Long id);
 }
 

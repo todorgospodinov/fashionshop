@@ -35,4 +35,6 @@ public class CloudinaryServiceImpl implements CloudinaryService {
                 .get(URL)
                 .toString();
     }
+
+
 }

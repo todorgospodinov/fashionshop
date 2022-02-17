@@ -55,4 +55,11 @@ public class CompetitionServiceImpl implements CompetitionService {
                 map(c -> modelMapper.map(c, CompetitionViewModel.class)).
                 collect(Collectors.toList());
     }
+
+    @Override
+    public void delete(Long id) {
+        this.competitionRepository.deleteById(id);
+    }
+
+
 }

@@ -85,6 +85,10 @@
         }
 .card {
     border: 3px coral dotted;
+    padding:5px;
+}
+.card-header{
+    font-weight: bold;
 }
 
 .form-control-file{
@@ -102,12 +106,12 @@
 
         <div class="col-sm-2 sidenav">
             <div class="card" >
-                <div class="card-header">"Model of the Week" contest</div>
+                <div class="card-header">"Model of the Week"</div>
                 <div class="card-body">
-            <form id="add-article-form"  th:action="@{/cloud}" th:method="POST"
+            <form id="add-article-form"  th:action="@{/cloud/add}" th:method="POST"
                   enctype="multipart/form-data">
                 <div class="form-group">
-                    <h5 class="card-title"> Send your model</h5>
+                    <h5 class="card-title"> Submit your project for the contest</h5>
                     <label for="add-article-title" class="font-weight-bold"></label>
                     <input type="text" class="form-control text-center" id="add-article-title" name="name"
                            required="required" placeholder="What is your name">

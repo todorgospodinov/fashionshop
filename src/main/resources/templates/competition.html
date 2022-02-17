@@ -57,18 +57,22 @@
         </div>
 
         <div class="col-sm-8 text-left">
-            <h3>We present to you all participants in Fashion Forum clothing model competition</h3>
+            <h3>Clothing model competition in Fashion Forum </h3>
 
             <div class="col-5 bg-dark rounded m-auto" >
 
                 <th:block th:each="c : ${competitions}" th:object="${c}">
                     <div class="row">
-                        <p><span th:text="|Sent by: *{name}|"></span></p>>
+                        <p><span th:text="|Sent by: *{name}|"></span></p>
 
                         <img th:src="*{imgUrl}" class="img-thumbnail" alt="Competition's pictures" >
                     </div>
+                    <a href="/home">Back</a>
+                    <div  class="btn-group">
+                        <a th:href="@{/cloud/delete/{id}(id=*{id})}"  type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    </div>
                 </th:block>
-                <a href="/home">Back</a>
+
             </div>
         </div>
 

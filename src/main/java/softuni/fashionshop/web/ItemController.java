@@ -85,8 +85,10 @@ redirectAttributes.addFlashAttribute("itemAddBindingModel", itemAddBindingModel)
 
 
     @GetMapping("/update/{id}")
-    public String updateItem (@PathVariable Long id){
-      return "update-item";
+    public String updateItem (@PathVariable Long id, Model model){
+
+        model.addAttribute("brands",brandService.findAllBrands());
+        return "update-item";
     }
 
 

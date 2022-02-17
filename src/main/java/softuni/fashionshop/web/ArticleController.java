@@ -109,17 +109,14 @@ if(article.isPresent()){
     }
 
 @PostMapping("/update/{id}")
-public String confirmUpdateArticle(@PathVariable Long id, ModelMapper modelMapper,ArticleAddBindingModel articleAddBindingModel,
-                                                                      @AuthenticationPrincipal UserDetails principal) {
+public String confirmUpdateArticle(@PathVariable Long id, ModelMapper modelMapper,
+                                   ArticleAddBindingModel articleAddBindingModel,
+                                                                     @AuthenticationPrincipal UserDetails principal) {
 
     ArticleServiceModel articleServiceModel = modelMapper
             .map(articleAddBindingModel, ArticleServiceModel.class);
-
     articleServiceModel.setUser(principal.getUsername());
-
-
     articleService.addArticle(articleServiceModel);
-
         return "redirect:/articles/all";
 }
 
