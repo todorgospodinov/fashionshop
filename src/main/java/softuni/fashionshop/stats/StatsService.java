@@ -2,6 +2,7 @@ package softuni.fashionshop.stats;
 
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.springframework.stereotype.Service;
 
 @Service

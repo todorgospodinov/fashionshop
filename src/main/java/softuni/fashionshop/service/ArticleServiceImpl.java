@@ -36,7 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void addArticle(ArticleServiceModel articleServiceModel) {
-        ArticleEntity articleEntity = this.modelMapper.map(articleServiceModel, ArticleEntity .class);
+        ArticleEntity articleEntity = this.modelMapper.map(articleServiceModel, ArticleEntity.class);
         articleEntity.setCreatedOn(Instant.now());
 
         UserEntity creator = userRepository.

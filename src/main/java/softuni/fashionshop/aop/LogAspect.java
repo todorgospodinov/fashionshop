@@ -17,10 +17,13 @@ public class LogAspect {
     }
 
     @Pointcut("execution(* softuni.fashionshop.web.ItemController.details(..))")
-    public void detailsPointcut(){};
+    public void detailsPointcut() {
+    }
+
+    ;
 
     @After("detailsPointcut()")
-    public void afterAdvice(JoinPoint joinPoint){
+    public void afterAdvice(JoinPoint joinPoint) {
 
         Object[] args = joinPoint.getArgs();
         Long itemId = (Long) args[0];

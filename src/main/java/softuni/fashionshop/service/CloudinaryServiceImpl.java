@@ -36,5 +36,4 @@ public class CloudinaryServiceImpl implements CloudinaryService {
                 .toString();
     }
 
-
 }

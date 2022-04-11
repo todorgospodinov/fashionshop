@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 
 public class ItemAddBindingModel {
+    private Long id;
     private String name;
     private String description;
     private CategoryEnum categoryEnum;
@@ -24,6 +25,15 @@ public class ItemAddBindingModel {
     private BigDecimal price;
 
     public ItemAddBindingModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public ItemAddBindingModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public ItemAddBindingModel(CategoryEnum categoryEnum) {

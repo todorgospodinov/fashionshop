@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class ItemViewModel {
-private Long id;
+    private Long id;
     private String name;
     private String description;
     private BigDecimal price;
@@ -103,5 +103,20 @@ private Long id;
     public ItemViewModel setBrand(String brand) {
         this.brand = brand;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemViewModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", receivedOn=" + receivedOn +
+                ", categoryEnum=" + categoryEnum +
+                ", brand='" + brand + '\'' +
+                '}';
     }
 }

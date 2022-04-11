@@ -1,5 +1,8 @@
 package softuni.fashionshop.model.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public class UserEntity extends BaseEntity {
     private String email;
     private String password;
     private String fullName;
-
+//    private List<LogEntity> logs;
     private List<Role> roles = new ArrayList<>();
 
     public UserEntity() {
@@ -49,7 +52,7 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    @Column(name = "fullName")
+    @Column(name = "full_name")
     public String getFullName() {
         return fullName;
     }
@@ -73,4 +76,14 @@ public class UserEntity extends BaseEntity {
         this.roles.add(role);
         return this;
     }
+//    @OneToMany(mappedBy = "userEntity")
+//    @OnDelete(action= OnDeleteAction.CASCADE)
+//    public List<LogEntity> getLogs() {
+//        return logs;
+//    }
+//
+//    public UserEntity setLogs(List<LogEntity> logs) {
+//        this.logs = logs;
+//        return this;
+//    }
 }

@@ -75,7 +75,8 @@
             <h1>Update product</h1>
 
             <hr>
-            <form th:object="${itemAddBindingModel}" th:action="@{/items/update}" method="POST">
+            <form th:object="${itemAddBindingModel}" th:action="@{/items/update/{id}(id=*{id})}"
+                  th:method="POST">
 
                 <div>
                     <div class="col-auto">
@@ -118,8 +119,7 @@
                     </div>
                 </div>
 
-
-                 <div>
+                <div>
                     <div class="col-auto">
                         <label for="inputCategoryEnum" class="col-form-label text-light">Category</label>
                     </div>
@@ -129,9 +129,11 @@
                                 required
                                 name="categoryEnum">
                             <option value="">Select category</option>
-                            //pravim si masiv ot categoryname
+                            <!--pravim si masiv ot categoryname-->
                             <option  th:each="o : ${T(softuni.fashionshop.model.entity.enums.CategoryEnum).values()}"
-                                     th:text="${o}"  th:value="${o}">Shirt</option>
+                                     th:text="${o}"
+                                     th:selected="${o} == *{categoryEnum}"
+                                     th:value="${o}">Shirt</option>
                         </select>
                     </div>
                     <div class="col-auto">
@@ -151,12 +153,13 @@
                             th:errorclass="is-invalid"
                             required
                             class="form-control">
-                        <option value="">- Select brand -</option>
-                        <option
-                                th:each="b: ${brands}"
-                                th:value="${b}"
-                                th:text="${b}" >
-                        </option>
+                                                <option value="">- Select brand -</option>
+                                                <option
+                                                        th:each="b: ${brands}"
+                                                        th:value="${b}"
+                                                        th:selected="${b} == *{getBrand()}"
+                                                        th:text="${b}" >
+                                                </option>
                     </select>
 
                     <div class="col-auto">
@@ -177,13 +180,14 @@
                                class="form-control"
                                aria-describedby="receivedOnHelpInline">
                     </div>
-                 <div class="col-auto">
+                    <div class="col-auto">
                         <small th:if="${#fields.hasErrors('receivedOn')}" th:errors="*{receivedOn}" id="receivedOnError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
                             Password length must be between 5 and 20 characters and passwords should match.
                         </small>
                     </div>
-                </div>
+
+
 
                 <div>
                     <div class="col-auto">
@@ -224,9 +228,7 @@
                         </small>
                     </div>
                 </div>
-
-
-
+                </div>
 
 
                 <div>

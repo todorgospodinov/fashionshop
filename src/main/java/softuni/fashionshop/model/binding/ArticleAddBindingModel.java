@@ -9,13 +9,13 @@ import java.time.Instant;
 public class ArticleAddBindingModel {
 
 
-
     private Long id;
     private String title;
     private String imageUrl;
     private StyleEnum styleEnum;
     private String content;
     private Instant createdOn;
+    private String author;
 
 
     public Long getId() {
@@ -79,6 +79,7 @@ public class ArticleAddBindingModel {
         return this;
     }
 
+
     @Override
     public String toString() {
         return "ArticleAddBindingModel{" +
@@ -87,5 +88,14 @@ public class ArticleAddBindingModel {
                 ", styleEnum=" + styleEnum +
                 ", content='" + content + '\'' +
                 '}';
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public ArticleAddBindingModel setAuthor(String author) {
+        this.author = author;
+        return this;
     }
 }

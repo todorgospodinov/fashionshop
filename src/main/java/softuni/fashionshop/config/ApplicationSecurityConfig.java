@@ -35,13 +35,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                         antMatchers("/", "/users/login", "/users/register").permitAll().
                 // protect all other pages
                         antMatchers("/articles/add").hasRole("ADMIN").
-                        antMatchers("/**").authenticated().
+                antMatchers("/**").authenticated().
                 and().
                 // configure login with HTML form
                         formLogin().
                 // our login page will be served by the controller with mapping /users/login
                         loginPage("/users/login").
-                // the name of the user name input field in OUR login form is username (optional)
+                // the name of the username input field in OUR login form is username (optional)
                         usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY).
                 // the name of the user password input field in OUR login form is password (optional)
                         passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
@@ -51,17 +51,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                         failureForwardUrl("/users/login-error").
                 and().
                 logout(logout -> logout.
-                // which endpoint performs logout, e.g. http://localhost:8080/logout (!this should be POST request - this is action anti CSF Attacks)
-                        logoutUrl("/logout").
-                // where to land after logout
-                        logoutSuccessUrl("/").
-                // remove the session from the server
-                        invalidateHttpSession(true).
-                // delete the session cookie
-                        deleteCookies("JSESSIONID"));
+                        // which endpoint performs logout, e.g. http://localhost:8080/logout (!this should be POST request - this is action anti CSF Attacks)
+                                logoutUrl("/logout").
+                        // where to land after logout
+                                logoutSuccessUrl("/").
+                        // remove the session from the server
+                                invalidateHttpSession(true).
+                        // delete the session cookie
+                                deleteCookies("JSESSIONID"));
     }
-
-
 
 
     @Override

@@ -1,5 +1,7 @@
 package softuni.fashionshop.model.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import softuni.fashionshop.model.entity.enums.CategoryEnum;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -23,6 +26,7 @@ public class Item extends BaseEntity {
     private CategoryEnum categoryEnum;
     private Brand brand;
     private UserEntity userEntity;
+
 
     public Item() {
     }
@@ -78,6 +82,7 @@ public class Item extends BaseEntity {
         this.imageUrl = imageUrl;
         return this;
     }
+
     @Column(name = "video_url", nullable = false)
     public String getVideoUrl() {
         return videoUrl;
@@ -99,6 +104,7 @@ public class Item extends BaseEntity {
     }
 
     @ManyToOne
+    //@OnDelete(action= OnDeleteAction.CASCADE)
     public Brand getBrand() {
         return brand;
     }
@@ -109,6 +115,7 @@ public class Item extends BaseEntity {
     }
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public UserEntity getUserEntity() {
         return userEntity;
     }
@@ -117,4 +124,6 @@ public class Item extends BaseEntity {
         this.userEntity = userEntity;
         return this;
     }
+
+
 }

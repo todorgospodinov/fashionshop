@@ -3,6 +3,7 @@ package softuni.fashionshop.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.fashionshop.exceptions.ObjectNotFoundException;
+import softuni.fashionshop.model.binding.ItemUpdateBindingModel;
 import softuni.fashionshop.model.entity.Brand;
 import softuni.fashionshop.model.entity.Item;
 import softuni.fashionshop.model.entity.UserEntity;
@@ -12,7 +13,9 @@ import softuni.fashionshop.repository.ItemRepository;
 import softuni.fashionshop.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.Instant;
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -34,6 +37,7 @@ public class ItemServiceImpl implements ItemService {
     public void addItem(ItemServiceModel itemServiceModel) {
 
         Item item = this.modelMapper.map(itemServiceModel, Item.class);
+
         UserEntity creator = userRepository.
                 findByUsername(itemServiceModel.getUser()).
                 orElseThrow(() -> new IllegalArgumentException("Creator " + itemServiceModel.getUser() + " could not be found"));
@@ -74,6 +78,30 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findAll();
     }
 
+    @Override
+    public Optional<Item> updateItem(Long id) {
+        return itemRepository.findById(id);
+    }
+
+    @Override
+    public void addUpdateItem(ItemServiceModel itemServiceModel) {
+        Item item = this.modelMapper.map(itemServiceModel, Item.class);
+
+        UserEntity creator = userRepository.
+                findByUsername(itemServiceModel.getUser()).
+                orElseThrow(() -> new IllegalArgumentException("Creator " + itemServiceModel.getUser() + " could not be found"));
+
+        item.setUserEntity(creator);
+
+        this.itemRepository.saveAndFlush(item);
+    }
+
+    @Override
+    public ItemServiceModel findItemById(Long id) {
+        return modelMapper.map(
+                itemRepository.findById(id).orElse(null), ItemServiceModel.class);
+    }
+
 
 //    @Override
 //    public Offer deleteOffer(Long id) {
@@ -85,7 +113,7 @@ public class ItemServiceImpl implements ItemService {
 
 
 
-//    Item item = this.modelmapper.map(itemServiceModel, Item.class);
+//    Item item = this.modelMapper.map(itemServiceModel, Item.class);
 //        item.setCategory(this.categoryService.find(itemServiceModel.getCategory().getCategoryName()));
 //        this.itemRepository.saveAndFlush(item);
 
