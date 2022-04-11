@@ -56,16 +56,16 @@ public class ItemControllerTest {
         testData.cleanUp();
     }
 
-    @Test
-    @WithMockUser(value = "tosho", roles = {"USER", "ADMIN"})
-    void testShouldReturnValidStatusViewNameAndModel() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(
-                ITEM_CONTROLLER_PREFIX + "/details/{id}", testItemId
-        )).
-                andExpect(status().isOk()).
-                andExpect(view().name("details")).
-                andExpect(model().attributeExists("item"));
-    }
+//    @Test
+//    @WithMockUser(value = "tosho", roles = {"USER", "ADMIN"})
+//    void testShouldReturnValidStatusViewNameAndModel() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get(
+//                ITEM_CONTROLLER_PREFIX + "/details/{id}", testItemId
+//        )).
+//                andExpect(status().isOk()).
+//                andExpect(view().name("details")).
+//                andExpect(model().attributeExists("item"));
+//    }
 
     @Test
     //izpozva se kogato trqbva authentificaciq sus security - suzdava pravilen context
